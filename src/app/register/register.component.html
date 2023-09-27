@@ -1,0 +1,81 @@
+<!-- <p-toast position="top-center" key="tc"></p-toast>  -->
+<div class="container  mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3  col-sm-12">
+            <h3 class="text-center p-3">Sign-Up</h3>
+            <form class="example-form container" [formGroup]="UserDetail" (ngSubmit)="UserDetail.valid && onSubmit()" novalidate>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Name</mat-label>
+                            <input matInput formControlName="userName" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="userName.hasError('pattern') && !userName.hasError('required')">Please enter a valid Name</mat-error>
+                            <mat-error *ngIf="userName.hasError('required')">
+                                Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">Please enter a valid email address</mat-error>
+                            <mat-error *ngIf="email.hasError('required')">
+                                Email is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Password</mat-label>
+                            <input type="password" id="password" matInput formControlName="password" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                            <mat-hint *ngIf="password.valid">Looks Strong Like You!</mat-hint>
+                            <mat-error *ngIf="password.hasError('pattern') && !password.hasError('required')">Password must include 1 uppercase, 1 special symbol and 1 number</mat-error>
+                            <mat-error *ngIf="password.hasError('required')">
+                                Password is required</mat-error>
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col-12">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Confirm Password</mat-label>
+                            <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="matcher" [type]="c_hide ? 'password' : 'text'">
+                            <mat-error *ngIf="confirmPassword.hasError('required')">Required Field</mat-error>
+                            <mat-error *ngIf="confirmPassword.hasError('matching')">Passwords not matched
+                            </mat-error>
+                            <a mat-icon-button matSuffix (click)="c_hide = !c_hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{c_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex ">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Avatar</mat-label>
+                            <mat-select formControlName="avatar" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let img of avatarList" id="avatar" value={{img}} (click)="avatar_click(img)"><img id="displayPic" src={{img}} class="ms-5 rounded" alt="" height="50px" width="50px"></mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="displayPic.hasError('required')">Avatar is Required</mat-error>
+                        </mat-form-field>
+                        <img *ngIf="selected_Avatar" [src]="selected_Avatar" class="ms-5 mb-3 rounded" height="40px" width="40px" alt="">
+                    </div>
+                </div>
+                <br>
+                <div class="col pb-5">
+                    <p class=" pt-3 text-secondary d-flex justify-content-center"><a routerLink="/login" class="text-decoration-none">Already have
+                            an account?Login!</a></p>
+                    <button mat-raised-button color="primary" type="submit" class="example-full-width">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
