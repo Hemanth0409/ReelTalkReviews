@@ -25,7 +25,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private registeration: RegisterationService,private http:HttpClient
+  constructor(private registeration: RegisterationService, private http: HttpClient
 
   ) { }
 
@@ -75,15 +75,16 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      avatar:this.displayPic,     
+      avatar: this.displayPic,
     });
   }
   avatar_click(img: string) {
     this.selected_Avatar = img;
-  }  
+  }
   onSubmit() {
-    this.registeration.register(this.UserDetail.value);
-    console.log(this.UserDetail.value);
+    if (this.UserDetail.valid) {
+      this.registeration.register(this.UserDetail.value);
+    }
   }
 }
 

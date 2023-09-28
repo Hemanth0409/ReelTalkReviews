@@ -9,8 +9,8 @@
                     <mat-form-field class="example-full-width form-group">
                         <mat-label>Email</mat-label>
                         <input matInput formControlName="email" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="Email.hasError('email') && !Email.hasError('required')">Please enter a valid email address</mat-error>
-                        <mat-error *ngIf="Email.hasError('required')">
+                        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">Please enter a valid email address</mat-error>
+                        <mat-error *ngIf="email.hasError('required')">
                             Email is required</mat-error>
                     </mat-form-field>
                     <mat-form-field class="example-full-width form-group">
@@ -19,14 +19,14 @@
                         <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </a>
-                        <mat-error *ngIf="Password.hasError('required')">
+                        <mat-error *ngIf="password.hasError('required')">
                             Password is required</mat-error>
                     </mat-form-field>
                 </div>
                 <br>
                 <div class="col pb-5">
-                    <p class=" pt-3 text-secondary d-flex justify-content-center"><a routerLink="/register" class="text-decoration-none">Don't have an Account? Signup!</a></p>
-                    <button mat-raised-button color="primary" type="submit" class="example-full-width">
+                    <p class=" pt-3 text-secondary d-flex justify-content-center"><a routerLink="/register" class="text-decoration-none">Don't have an Account? Register Here!</a></p>
+                    <button mat-raised-button color="primary" type="submit" class="example-full-width" (click)="onSubmit()">
                         Login
                     </button>
                 </div>

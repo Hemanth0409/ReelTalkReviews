@@ -3,19 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import {environment} from 'src/environment/environment'
-import {UserDetail} from 'src/models/UserDetails'
-
-
-
+import { environment } from 'src/environment/environment'
+import { UserDetail } from 'src/models/UserDetails'
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterationService {
   constructor(private http: HttpClient, private alert: MessageService, private router: Router) { }
 
-  user_details_url = 'https://localhost:7205/api/UserDetails';
-
+  user_details_url = environment.UserDetailApi;
+  userDetails_Login = environment.UserDetailsLogin;
   public authSubject = new Subject<boolean>;
   validateAuth(state: boolean) {
     this.authSubject.next(state);
@@ -35,14 +32,11 @@ export class RegisterationService {
   register(form: UserDetail) {
     return this.http.post<UserDetail>(this.user_details_url, form).subscribe(
       {
-        next: () => {
-
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 1000);
+        next: () => { 
+            this.router.navigate(['login']);        
         },
-        error: () => {
-          console.log('error')
+        error: (error) => {
+          console.log(error )
           this.alert.add({
             key: 'tc',
             severity: 'error',
@@ -54,22 +48,22 @@ export class RegisterationService {
     );
   }
 
-  signIn() {
-    return this.http.get<UserDetail[]>(this.user_details_url);
-  }
-
-  getActiveUser() {
-    return this.http.get<UserDetail[]>(this.user_details_url + '/?islogged_like=true');
-  }
-
-  isLoggedIn(item: UserDetail, id: number) {
-    let reg = this.user_details_url + '/' + id;
-    item.isLogged = true;
-    return this.http.put(reg, item).subscribe(() => { });
-  }
-  isLoggedOut(item: UserDetail, id: number) {
-    let reg = this.user_details_url + '/' + id;
-    item.isLogged = false;
-    return this.http.put(reg, item).subscribe(() => { });
-  }
+  signIn(form: UserDetail) {
+    return this.http.post<UserDetail[]>(this.userDetails_Login, form).subscribe(
+      {
+        next: () => {
+            this.router.navigate(['home']);   
+        },
+        error: (err) => {
+          console.log(err)
+          this.alert.add({
+            key: 'tc',
+            severity: 'error',
+            summary: 'Try again later',
+            detail: 'Something went wrong',
+          });
+        }
+      }
+    );
+  } 
 }
