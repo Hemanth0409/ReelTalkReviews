@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environment/environment'
 import { UserDetail } from 'src/models/UserDetails'
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterationService {
-  constructor(private http: HttpClient, private alert: MessageService, private router: Router) { }
+  constructor(private http: HttpClient, private alert: MessageService, private router: Router,private auth:AuthService) { }
 
-  user_details_url = environment.UserDetailApi;
+  user_details_url = environment.UserRegisteration;
   userDetails_Login = environment.UserDetailsLogin;
   public authSubject = new Subject<boolean>;
   validateAuth(state: boolean) {
@@ -29,41 +30,15 @@ export class RegisterationService {
     return this.status;
   }
 
-  register(form: UserDetail) {
-    return this.http.post<UserDetail>(this.user_details_url, form).subscribe(
-      {
-        next: () => { 
-            this.router.navigate(['login']);        
-        },
-        error: (error) => {
-          console.log(error )
-          this.alert.add({
-            key: 'tc',
-            severity: 'error',
-            summary: 'Try again later',
-            detail: 'Something went wrong',
-          });
-        }
-      }
-    );
+  register(registerForm: UserDetail) {
+    return this.http.post<UserDetail>(this.user_details_url, registerForm)
   }
 
-  signIn(form: UserDetail) {
-    return this.http.post<UserDetail[]>(this.userDetails_Login, form).subscribe(
-      {
-        next: () => {
-            this.router.navigate(['home']);   
-        },
-        error: (err) => {
-          console.log(err)
-          this.alert.add({
-            key: 'tc',
-            severity: 'error',
-            summary: 'Try again later',
-            detail: 'Something went wrong',
-          });
-        }
-      }
-    );
+  signIn(loginForm: UserDetail) {
+    return this.http.post<UserDetail>(this.userDetails_Login, loginForm)
   } 
+  signOut(){
+    localStorage.clear();
+    this.router.navigate(['login']);
+  }
 }

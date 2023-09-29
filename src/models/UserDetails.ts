@@ -1,5 +1,5 @@
 export interface UserDetail{
-    message(message: any): unknown
+   
     userId:number,
     userName:string,
     email:string,
@@ -10,5 +10,5 @@ export interface UserDetail{
     createdDate:Date,
     modifiedDate:Date,
     roleId:number
-    isLogged:boolean
+    token:string
 }

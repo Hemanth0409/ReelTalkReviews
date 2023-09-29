@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { RegisterationService } from 'src/services/registration.service';
 import { matchValidator } from 'src/shared/ConfirmPassword'
 import { UserDetail } from 'src/models/UserDetails'
+import { AuthService } from 'src/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -30,7 +31,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginComponent implements OnInit {
   constructor(private registeration: RegisterationService,
     private router: Router,
-    private alert: MessageService,) { }
+    private alert: MessageService,private auth:AuthService) { }
 
   //password hide property
   hide = true;
@@ -54,7 +55,24 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.signinForm.valid) {
-    this.registeration.signIn(this.signinForm.value)
+    this.registeration.signIn(this.signinForm.value).subscribe(
+      {
+        next: (res) => {
+       this.auth.storeToken(res.token);
+            this.router.navigate(['home']);   
+        },
+        error: (err) => {
+          console.log(err)
+          this.alert.add({
+            key: 'tc',
+            severity: 'error',
+            summary: 'Try again later',
+            detail: 'Something went wrong',
+          });
+        }
+      }
+    );;
+    
     }
   }
 }

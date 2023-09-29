@@ -23,6 +23,8 @@
     "bootstrap": "^5.3.2",
     "matui": "^0.20.3",
     "ng-recaptcha": "^12.0.2",
+    "ng-toast": "^2.0.0",
+    "ngtoast": "^2.0.1",
     "primeicons": "^6.0.1",
     "primeng": "^16.3.1",
     "rxjs": "~7.8.0",

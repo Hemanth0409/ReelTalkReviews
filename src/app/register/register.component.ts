@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { RegisterationService } from 'src/services/registration.service';
 import { matchValidator } from 'src/shared/ConfirmPassword';
-
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -25,9 +26,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private registeration: RegisterationService, private http: HttpClient
 
-  ) { }
+  constructor(private registeration: RegisterationService, private alert: MessageService, private router: Router) { }
 
   UserDetail!: FormGroup;
   userName!: FormControl;
@@ -83,7 +83,22 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     if (this.UserDetail.valid) {
-      this.registeration.register(this.UserDetail.value);
+      this.registeration.register(this.UserDetail.value).subscribe(
+        {
+          next: () => {
+            this.router.navigate(['login']);
+          },
+          error: (error) => {
+            console.log(error)
+            this.alert.add({
+              key: 'tc',
+              severity: 'error',
+              summary: 'Try again later',
+              detail: 'Something went wrong',
+            });
+          }
+        }
+      );;
     }
   }
 }

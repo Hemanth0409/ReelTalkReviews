@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Mat UI
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { TokenInterceptor } from 'src/interceptors/token.interceptor';
 
 
 @NgModule({
@@ -53,7 +54,12 @@ import { HomeComponent } from './home/home.component';
     MatStepperModule,
     MatIconModule
   ],
-  providers: [MessageService  ],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  },MessageService 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
