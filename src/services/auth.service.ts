@@ -10,6 +10,8 @@ export class AuthService {
     this.userPayload = this.decodeToken();
   }
 
+  // userRole:Subject<s>
+
   storeToken(tokenValue: string) {
     localStorage.setItem('token', tokenValue);
   }
@@ -27,12 +29,15 @@ export class AuthService {
   }
   getUserName() {
     if (this.userPayload){
-      return this.userPayload.name;
+      return this.userPayload.unique_name;
     }
   }
   getRole() {
     if (this.userPayload){
-      return this.userPayload.role ;
+      return this.userPayload.role;
     }
   }
+  // renewToken(tokenApi : TokenApiModel){
+  //   return this.http.post<any>(`${this.baseUrl}refresh`, tokenApi)
+  // }
 }
