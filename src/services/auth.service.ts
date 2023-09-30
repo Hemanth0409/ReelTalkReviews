@@ -1,12 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environment/environment';
+import { TokenApiModel } from 'src/models/tokenApi.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private userPayload: any;
-  constructor() {
+  refreshURL=environment.userTokenRefresh
+  constructor(private http:HttpClient) {
     this.userPayload = this.decodeToken();
   }
 
@@ -15,8 +19,14 @@ export class AuthService {
   storeToken(tokenValue: string) {
     localStorage.setItem('token', tokenValue);
   }
+  storeRefreshToken(tokenValue: string) {
+    localStorage.setItem('refreshToken', tokenValue);
+  }
   getToken() {
     return localStorage.getItem('token');
+  }
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
   }
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
@@ -37,7 +47,7 @@ export class AuthService {
       return this.userPayload.role;
     }
   }
-  // renewToken(tokenApi : TokenApiModel){
-  //   return this.http.post<any>(`${this.baseUrl}refresh`, tokenApi)
-  // }
+  renewToken(tokenApi : TokenApiModel){
+    return this.http.post<any>(this.refreshURL, tokenApi)
+  }
 }

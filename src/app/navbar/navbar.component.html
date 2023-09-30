@@ -73,15 +73,19 @@
                         <i class="fas fa-bookmark pe-2"></i> Watchlist
                     </a>
                 </li>
-                <li class="nav-item" style="width: 65px;">
-                    <a class="nav-link d-flex align-items-center" routerLink="login">Sign In</a>
-                </li>
-                <li class="nav-item" style="width: 65px;">
-                    <a class="nav-link d-flex align-items-center" >Hello{{name}}</a>
-                </li>
-                <li class="nav-item" style="width: 65px;">
-                    <a class="nav-link d-flex align-items-center" (click)="logout()">Logout</a>
-                </li>
+                <ng-container *ngIf="!hide">
+                    <li class="nav-item" style="width: 65px;">
+                        <a class="nav-link d-flex align-items-center" routerLink="login">Sign In</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="role=='Admin'|| role=='User'">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center">Hello{{name}}</a>
+                    </li>
+                    <li class="nav-item" style="width: 65px;">
+                        <a class="nav-link d-flex align-items-center" (click)="logout()">Logout</a>
+                    </li>
+                </ng-container>
             </ul>
         </div>
         <!-- Collapsible wrapper -->

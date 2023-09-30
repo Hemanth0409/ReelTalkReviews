@@ -1,14 +1,16 @@
-export interface UserDetail{
+export interface UserDetail {
+
+    userId: number,
+    userName: string,
+    email: string,
+    password: string,
+    displayPic: string,
+    bio: string,
+    isDeleted: boolean,
+    createdDate: Date,
+    modifiedDate: Date,
+    roleId: number,
+    token: string,
+
    
-    userId:number,
-    userName:string,
-    email:string,
-    password:string,
-    displayPic:string, 
-    bio:string,
-    isDeleted:boolean,
-    createdDate:Date,
-    modifiedDate:Date,
-    roleId:number
-    token:string
 }

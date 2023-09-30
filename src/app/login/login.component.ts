@@ -8,7 +8,8 @@ import { RegisterationService } from 'src/services/registration.service';
 import { matchValidator } from 'src/shared/ConfirmPassword'
 import { UserDetail } from 'src/models/UserDetails'
 import { AuthService } from 'src/services/auth.service';
-
+import { UserDetailService } from 'src/services/user-detail.service';
+import { TokenApiModel } from 'src/models/tokenApi.model';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -29,9 +30,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private registeration: RegisterationService,
-    private router: Router,
-    private alert: MessageService,private auth:AuthService) { }
+  constructor(private registeration: RegisterationService, private router: Router, private alert: MessageService,
+    private auth: AuthService, private userDetail: UserDetailService) { }
 
   //password hide property
   hide = true;
@@ -55,24 +55,28 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.signinForm.valid) {
-    this.registeration.signIn(this.signinForm.value).subscribe(
-      {
-        next: (res) => {
-       this.auth.storeToken(res.token);
-            this.router.navigate(['home']);   
-        },
-        error: (err) => {
-          console.log(err)
-          this.alert.add({
-            key: 'tc',
-            severity: 'error',
-            summary: 'Try again later',
-            detail: 'Something went wrong',
-          });
-        }
-      }
-    );;
-    
+      this.registeration.signIn(this.signinForm.value).subscribe(
+        {
+          next: (res) => {
+            this.auth.storeToken(res.accessToken);
+            this.auth.storeRefreshToken(res.refreshToken);
+            const tokenPayload = this.auth.decodeToken();
+            this.userDetail.setFullName(tokenPayload.unique_name);
+            this.userDetail.setRole(tokenPayload.role);
+            console.log(tokenPayload.role)
+        
+            this.router.navigate(['home']);
+          },
+          error: (err) => {
+            console.log(err)
+            this.alert.add({
+              key: 'tc',
+              severity: 'error',
+              summary: 'Try again later',
+              detail: 'Something went wrong',
+            });
+          }
+        });
     }
   }
 }

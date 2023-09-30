@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { environment } from 'src/environment/environment'
 import { UserDetail } from 'src/models/UserDetails'
 import { AuthService } from './auth.service';
+import { TokenApiModel } from 'src/models/tokenApi.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +36,7 @@ export class RegisterationService {
   }
 
   signIn(loginForm: UserDetail) {
-    return this.http.post<UserDetail>(this.userDetails_Login, loginForm)
+    return this.http.post<TokenApiModel>(this.userDetails_Login, loginForm)
   } 
   signOut(){
     localStorage.clear();

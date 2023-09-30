@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 baseURL=environment.UserDetails;
+
   constructor(private http:HttpClient) { }
   getUsers(){
-    console.log("hi");
     return this.http.get<UserDetail[]>(this.baseURL);
     
   }
