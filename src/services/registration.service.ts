@@ -41,4 +41,6 @@ export class RegisterationService {
     localStorage.clear();
     this.router.navigate(['login']);
   }
+
+  
 }
