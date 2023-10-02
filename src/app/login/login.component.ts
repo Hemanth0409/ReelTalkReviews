@@ -10,6 +10,8 @@ import { UserDetail } from 'src/models/UserDetails'
 import { AuthService } from 'src/services/auth.service';
 import { UserDetailService } from 'src/services/user-detail.service';
 import { TokenApiModel } from 'src/models/tokenApi.model';
+import { ResetPasswordService } from 'src/services/reset-password.service';
+import Swal from 'sweetalert2';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -31,7 +33,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
   constructor(private registeration: RegisterationService, private router: Router, private alert: MessageService,
-    private auth: AuthService, private userDetail: UserDetailService) { }
+    private auth: AuthService, private userDetail: UserDetailService, private resetPasswordService: ResetPasswordService) { }
 
   //password hide property
   hide = true;
@@ -39,9 +41,11 @@ export class LoginComponent implements OnInit {
   email!: FormControl;
   password!: FormControl;
   userDetails: UserDetail[] = [];
-
-
+  Femail: string = "";
   validdetail: boolean = false;
+
+  resetPassword: string = "";
+  isValidEmail!: boolean;
 
   ngOnInit(): void {
     this.email = new FormControl('', [Validators.required]);
@@ -52,7 +56,49 @@ export class LoginComponent implements OnInit {
     });
   }
   matcher = new MyErrorStateMatcher();
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
 
+  }
+  confirmToSend() {
+    if (this.checkValidEmail(this.resetPassword)) {
+      console.log(this.resetPassword);
+      this.resetPasswordService.sendResetPasswordLink(this.resetPassword).subscribe({
+        next: (res) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+          })
+          Toast.fire({
+            icon: 'success',
+            title: 'Reset Success!!'
+          })
+          this.resetPassword = "";
+          const buttonRef = document.getElementById("closeBtn");
+          buttonRef?.click();
+        },
+        error: (err) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+          })
+          Toast.fire({
+            icon: 'error',
+            title: 'Somting went wrong'
+          })
+        }
+      })
+    }
+  }
   onSubmit() {
     if (this.signinForm.valid) {
       this.registeration.signIn(this.signinForm.value).subscribe(
@@ -64,17 +110,22 @@ export class LoginComponent implements OnInit {
             this.userDetail.setFullName(tokenPayload.unique_name);
             this.userDetail.setRole(tokenPayload.role);
             console.log(tokenPayload.role)
-        
+
             this.router.navigate(['home']);
           },
           error: (err) => {
             console.log(err)
-            this.alert.add({
-              key: 'tc',
-              severity: 'error',
-              summary: 'Try again later',
-              detail: 'Something went wrong',
-            });
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+            })
+            Toast.fire({
+              icon: 'error',
+              title: 'Somting went wrong'
+            })
           }
         });
     }
