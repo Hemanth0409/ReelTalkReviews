@@ -4,5 +4,7 @@ export const environment = {
   UserDetails:'https://localhost:7205/api/UserDetails/GetUserDetails',
   userTokenRefresh:'https://localhost:7205/api/UserDetails/Refresh',
   emailSetUrl:'https://localhost:7205/api/UserDetails/SendEmail/send-reset-email',
-  resetPassword:'https://localhost:7205/api/UserDetails/ResetPassword/reset-password'
+  resetPassword:'https://localhost:7205/api/UserDetails/ResetPassword/reset-password',
+  movieDetail:'https://localhost:7205/api/MovieDetails/GetMovieDetails'
+
 }

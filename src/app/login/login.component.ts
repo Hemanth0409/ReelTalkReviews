@@ -5,11 +5,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { RegisterationService } from 'src/services/registration.service';
-import { matchValidator } from 'src/shared/ConfirmPassword'
 import { UserDetail } from 'src/models/UserDetails'
 import { AuthService } from 'src/services/auth.service';
 import { UserDetailService } from 'src/services/user-detail.service';
-import { TokenApiModel } from 'src/models/tokenApi.model';
 import { ResetPasswordService } from 'src/services/reset-password.service';
 import Swal from 'sweetalert2';
 export class MyErrorStateMatcher implements ErrorStateMatcher {

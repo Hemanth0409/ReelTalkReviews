@@ -4,6 +4,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from 'src/gaurd/auth.guard';
+import { MovielistComponent } from './movielist/movielist.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -16,6 +18,15 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,canActivate:[authGuard]
+  },
+  {
+    path: 'movie',
+    component: MovielistComponent,
+  }
+  ,
+  {
+    path: 'users',
+    component: UserDetailsComponent,
   }
 ];
 

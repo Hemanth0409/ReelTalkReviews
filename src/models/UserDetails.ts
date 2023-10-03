@@ -1,5 +1,4 @@
 export interface UserDetail {
-
     userId: number,
     userName: string,
     email: string,
@@ -7,10 +6,8 @@ export interface UserDetail {
     displayPic: string,
     bio: string,
     isDeleted: boolean,
-    createdDate: Date,
+    createdDate: string,
     modifiedDate: Date,
     roleId: number,
-    token: string,
-
-   
+    token: string   
 }

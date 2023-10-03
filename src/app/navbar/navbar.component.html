@@ -15,8 +15,8 @@
             <!-- Left links -->
             <ul class="navbar-nav me-3">
                 <li class="nav-item">
-                    <a class="nav-link active d-flex align-items-center" aria-current="page" href="#"><i
-                class="fas fa-bars pe-2"></i>Menu</a>
+                    <a class="nav-link active d-flex align-items-center" aria-current="page" routerLink="movie"><i
+                class="fas fa-bars pe-2" ></i>MovieList</a>
                 </li>
             </ul>
             <!-- Left links -->
@@ -73,6 +73,11 @@
                         <i class="fas fa-bookmark pe-2"></i> Watchlist
                     </a>
                 </li>
+                <ng-container *ngIf="role=='Admin'">
+                    <li class="nav-item" style="width: 90px;">
+                        <a class="nav-link d-flex align-items-center" routerLink="users">User List</a>
+                    </li>
+                </ng-container>
                 <ng-container *ngIf="!hide">
                     <li class="nav-item" style="width: 65px;">
                         <a class="nav-link d-flex align-items-center" routerLink="login">Sign In</a>
@@ -80,7 +85,7 @@
                 </ng-container>
                 <ng-container *ngIf="role=='Admin'|| role=='User'">
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center">Hello{{name}}</a>
+                        <a class="nav-link d-flex align-items-center"><i class="fa-solid fa-user me-1 mb-1"></i>{{name}}</a>
                     </li>
                     <li class="nav-item" style="width: 65px;">
                         <a class="nav-link d-flex align-items-center" (click)="logout()">Logout</a>

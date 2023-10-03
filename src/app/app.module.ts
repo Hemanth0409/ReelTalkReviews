@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MessageService, PrimeIcons } from 'primeng/api';
-
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from 'src/interceptors/token.interceptor';
+import { MovielistComponent } from './movielist/movielist.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { TokenInterceptor } from 'src/interceptors/token.interceptor';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    MovielistComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,7 @@ import { TokenInterceptor } from 'src/interceptors/token.interceptor';
     MatSelectModule,
     MatMenuModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,AgGridModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
