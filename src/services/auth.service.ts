@@ -44,10 +44,11 @@ export class AuthService {
   }
   getRole() {
     if (this.userPayload){
+      console.log(this.userPayload.role)
       return this.userPayload.role;
     }
   }
   renewToken(tokenApi : TokenApiModel){
-    return this.http.post<any>(this.refreshURL, tokenApi)
+    return this.http.post<any>(this.refreshURL, tokenApi);
   }
 }

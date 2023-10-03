@@ -5,7 +5,6 @@ export interface UserDetail {
     password: string,
     displayPic: string,
     bio: string,
-    isDeleted: boolean,
     createdDate: string,
     modifiedDate: Date,
     roleId: number,

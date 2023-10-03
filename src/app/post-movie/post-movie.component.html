@@ -1,0 +1,55 @@
+<!-- <p-toast position="top-center" key="tc"></p-toast>  -->
+<div class="container  mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3  col-sm-12">
+            <h3 class="text-center p-3">Sign-Up</h3>
+            <form class="example-form container" [formGroup]="movieDetails" (ngSubmit)="movieDetails.valid && onSubmit()" novalidate>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Movie Title</mat-label>
+                            <input matInput formControlName="movieTitle" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="movieTitle.hasError('required')"> Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Movie Type</mat-label>
+                            <input matInput formControlName="movieType" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="movieType.hasError('required')">
+                                movieType is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Film Certification</mat-label>
+                            <mat-select formControlName="filmCertificationId" id="certificationId" [(ngModel)]="selectedFilmCertification" [ngClass]="{'is-invalid':filmCertificationId.errors && (filmCertificationId.touched || filmCertificationId.dirty)}">
+                                <mat-option *ngFor="let film  of filmCertificationList" [value]="film.filmCertificationId">
+                                    {{ film.filmCertificationType }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="filmCertificationId.hasError('required')">
+                                Film Certification is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div class="form-outline mb-4">
+                    <input type="file" id="form3Example1" formControlName="moviePoster" class="form-control" [ngClass]="{'is-invalid':moviePoster.errors &&
+                                (moviePoster.touched || moviePoster.dirty),'is-valid': moviePoster.valid}" />
+                    <div class="invalid-feedback text-start fs-6 fst-normal text-danger justify-content-center ">
+                        <mat-error *ngIf="filmCertificationId.hasError('required')">
+                            Movie Poster is required</mat-error>
+                    </div>
+                </div> -->
+                <div class="col pb-5  mt-5">
+                    <button mat-raised-button color="primary" type="submit" class="example-full-width">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

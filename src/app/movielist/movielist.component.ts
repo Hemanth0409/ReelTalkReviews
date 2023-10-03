@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { MovieList } from 'src/models/movieList';
+import { AuthService } from 'src/services/auth.service';
 import { MovieDetailsService } from 'src/services/movie-details.service';
 @Component({
   selector: 'app-movielist',
@@ -10,9 +11,9 @@ import { MovieDetailsService } from 'src/services/movie-details.service';
 })
 export class MovielistComponent implements OnInit {
 
-  constructor(private movieService:MovieDetailsService ) { }
+  constructor(private movieService: MovieDetailsService, private auth: AuthService) { }
   movieList: MovieList[] = [];
-
+  userRole!: string;
   colDefs: ColDef[] = [
     { field: 'movieId', },
     { field: 'movieTitle', },
@@ -28,6 +29,7 @@ export class MovielistComponent implements OnInit {
     sortable: true, filter: true
   }
   ngOnInit(): void {
+    this.userRole=this.auth.getRole();
     this.movieService.getMovieDetails().subscribe({
       next: (res) => {
         this.movieList = res;

@@ -1,3 +1,8 @@
-<ag-grid-angular [rowData]="movieList" [columnDefs]="colDefs" class="ag-theme-alpine" style="height: 100vh;width: 100vw;" [defaultColDef]="defaultColDef" [rowSelection]="'multiple'" [animateRows]="true">
+<ng-container *ngIf="userRole=='Admin'">
 
-</ag-grid-angular>
+    <a routerLink="/postmovie"><button class="btn btn-dark tex-white float-end mt-2 me-3">Add Movies</button></a>
+    <ag-grid-angular [rowData]="movieList" [columnDefs]="colDefs" class="ag-theme-alpine mt-5" style="height: 100vh;width: 100vw;" [defaultColDef]="defaultColDef" [rowSelection]="'multiple'" [animateRows]="true">
+
+    </ag-grid-angular>
+
+</ng-container>

@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     this.login.signOut();
+    this.hide=true;
     const Toast = Swal.mixin({
       toast: true,
       position: 'top',
@@ -29,9 +30,8 @@ export class NavbarComponent implements OnInit {
       title: 'Logged successfully'
     }).then(() => {
       this.router.navigate(['login']);
-      this.hide = false;
     })
-    return true;
+
   }
 
 
@@ -39,11 +39,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     const token = this.auth.getToken();
     const refreshToken = this.auth.getRefreshToken();
-    if (token || refreshToken) {
-      this.hide = true;
+    if (token && refreshToken) {
+      this.hide = false;
     }
     else {
-      this.hide = false;
+      this.hide = true;
     }
     this.userDetail.getFullName().subscribe((val) => {
       let nameForToken = this.auth.getUserName();

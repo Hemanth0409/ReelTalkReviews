@@ -6,6 +6,7 @@ import { CellChangedEvent } from 'ag-grid-community/dist/lib/interfaces/iRowNode
 import { Observable } from 'rxjs';
 import { UserDetail } from 'src/models/UserDetails';
 import { ApiService } from 'src/services/api.service';
+import { ActionLinkComponent } from '../action-link/action-link.component';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -18,11 +19,9 @@ export class UserDetailsComponent implements OnInit {
     { field: 'userId', },
     { field: 'userName', },
     { field: 'email', },
-    { field: 'createdDate', },  
-    { field: 'modifiedDate', },
     { field: 'roleId'},
     { field: 'isDeleted' },
-    {headerName:'Action'}
+    {field: 'userId', headerName:'Action',cellRenderer:ActionLinkComponent}
 
   ]
   defaultColDef: ColDef = {

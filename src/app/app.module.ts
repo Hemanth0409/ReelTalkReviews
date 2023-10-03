@@ -27,6 +27,8 @@ import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from 'src/interceptors/token.interceptor';
 import { MovielistComponent } from './movielist/movielist.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { ActionLinkComponent } from './action-link/action-link.component';
+import { PostMovieComponent } from './post-movie/post-movie.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     HomeComponent,
     MovielistComponent,
     UserDetailsComponent,
+    ActionLinkComponent,
+    PostMovieComponent,
   ],
   imports: [
     BrowserModule,
