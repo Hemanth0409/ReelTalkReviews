@@ -1,15 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CellValueChangedEvent,
-  ColDef,
-  GridApi,
-  GridReadyEvent,
-  ICellEditorComp,
-  RowValueChangedEvent,
-} from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-import 'ag-grid-enterprise';
+import { ColDef, GridReadyEvent } from 'ag-grid-community';
 import { FilmIndustryMembers } from 'src/models/filmIndustryMembers';
 import { AuthService } from 'src/services/auth.service';
 import { CelebritiesService } from 'src/services/celebrities.service';
