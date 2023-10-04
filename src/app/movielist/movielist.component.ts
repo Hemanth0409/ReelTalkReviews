@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
-import { Observable } from 'rxjs';
+import { ColDef, GridReadyEvent } from 'ag-grid-community';
 import { MovieList } from 'src/models/movieList';
 import { AuthService } from 'src/services/auth.service';
 import { MovieDetailsService } from 'src/services/movie-details.service';
@@ -15,15 +14,16 @@ export class MovielistComponent implements OnInit {
   movieList: MovieList[] = [];
   userRole!: string;
   colDefs: ColDef[] = [
-    { field: 'movieId', },
-    { field: 'movieTitle', },
-    { field: 'movieType', },
-    { field: 'moviePoster', },
-    { field: 'movieRatingOverall', },
-    { field: 'filmCertificationId', },
-    { field: 'isDeleted', },
-    { field: 'createDate', },
-    { field: 'ModifiedDate', },
+    // { field: 'movieId'},
+    { field: 'movieTitle' },
+    { field: 'movieType' },
+    // { field: 'moviePoster' },
+    { field: 'movieRatingOverall' },
+    { field: 'filmCertificationId' },
+    // { field: 'isDeleted' },
+    // { field: 'createDate' },
+    // { field: 'ModifiedDate' },
+    {field:'releaseDate'}
   ]
   defaultColDef: ColDef = {
     sortable: true, filter: true
@@ -38,5 +38,14 @@ export class MovielistComponent implements OnInit {
         console.log(err);
       },
     })
+  }
+  onGridReady(params: GridReadyEvent) {
+    params.api.sizeColumnsToFit();
+    window.addEventListener('resize', function () {
+      setTimeout(function () {
+        params.api.sizeColumnsToFit();
+      });
+    });
+    params.api.sizeColumnsToFit();
   }
 }

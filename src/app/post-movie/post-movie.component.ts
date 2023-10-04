@@ -32,6 +32,7 @@ export class PostMovieComponent implements OnInit {
   movieTitle!: FormControl;
   movieType!: FormControl;
   moviePoster!: FormControl;
+  releaseDate!:FormControl;
   filmCertificationId!: FormControl;
   matcher = new MyErrorStateMatcher();
   filmCertificationList!:FilmCertifications|any ;
@@ -45,10 +46,11 @@ export class PostMovieComponent implements OnInit {
     this.movieType = new FormControl('', [Validators.required]);
     this.moviePoster = new FormControl('', [Validators.required]);
     this.filmCertificationId = new FormControl('', [Validators.required]);
+    this.releaseDate = new FormControl('', [Validators.required]);
     this.movieDetails = new FormGroup({
       movieTitle: this.movieTitle,
-      // moviePoster: this.moviePoster,
       movieType: this.movieType,
+      releaseDate:this.releaseDate,
       filmCertificationId: this.filmCertificationId,
     });
     this.movieDetail.getFilmCertification().subscribe(

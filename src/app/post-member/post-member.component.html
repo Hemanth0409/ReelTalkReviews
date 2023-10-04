@@ -1,0 +1,76 @@
+<!-- <p-toast position="top-center" key="tc"></p-toast>  -->
+<div class="container  mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3  col-sm-12">
+            <h3 class="text-center p-3">Member Registration</h3>
+            <form class="example-form container" [formGroup]="memberDetail" (ngSubmit)="memberDetail.valid && onSubmit()" novalidate>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Member Name</mat-label>
+                            <input matInput formControlName="memberName" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="memberName.hasError('required')"> Member Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="dateOfBirth.hasError('required')">
+                                Date Of Birth is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Place</mat-label>
+                            <input matInput formControlName="place" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="place.hasError('required')"> Place is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- <div class="row d-flex">
+                    <div class="col">
+                        <mat-label>Gender</mat-label>
+                        <mat-radio-group aria-label="Select an option" formControlName="gender">
+                            <mat-radio-button value="1">Male</mat-radio-button>
+                            <mat-radio-button value="2">Female</mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+                </div> -->
+                <label id="example-radio-group-label">Gender</label>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="gender" [(ngModel)]="genderValue">
+                    <mat-radio-button class="example-radio-button" *ngFor="let x of genderType" [value]="x">
+                        {{x}} </mat-radio-button>
+                </mat-radio-group>
+                <div>Gender:{{genderValue}}</div>
+
+                <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
+                            <mat-label>Member Description</mat-label>
+                            <input matInput formControlName="memberDescription" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="memberDescription.hasError('required')"> Member Description is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col pb-5  mt-5">
+                    <button mat-raised-button color="primary" type="submit" class="example-full-width">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

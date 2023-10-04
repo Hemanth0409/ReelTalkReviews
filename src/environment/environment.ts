@@ -8,4 +8,6 @@ export const environment = {
   movieDetail: 'https://localhost:7205/api/MovieDetails/GetMovieDetails',
   postMovie: 'https://localhost:7205/api/MovieDetails/PostMovieDetail',
   getFilmCertification:'https://localhost:7205/api/FilmCertifications/GetFilmCertifications',
+  getFilmIndustryMembers:'https://localhost:7205/api/FilmIndustryMembers/GetFilmIndustryMembers',
+  postFilmIndustryMembers:'https://localhost:7205/api/FilmIndustryMembers/PostFilmIndustryMember'
 }

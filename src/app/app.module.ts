@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MessageService, PrimeIcons } from 'primeng/api';
 import { AgGridModule } from 'ag-grid-angular';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +32,8 @@ import { MovielistComponent } from './movielist/movielist.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ActionLinkComponent } from './action-link/action-link.component';
 import { PostMovieComponent } from './post-movie/post-movie.component';
+import { CelebritiesComponent } from './celebrities/celebrities.component';
+import { PostMemberComponent } from './post-member/post-member.component';
 
 
 @NgModule({
@@ -43,6 +48,8 @@ import { PostMovieComponent } from './post-movie/post-movie.component';
     UserDetailsComponent,
     ActionLinkComponent,
     PostMovieComponent,
+    CelebritiesComponent,
+    PostMemberComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,11 @@ import { PostMovieComponent } from './post-movie/post-movie.component';
     MatSelectModule,
     MatMenuModule,
     MatStepperModule,
-    MatIconModule,AgGridModule
+    MatIconModule,
+    AgGridModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

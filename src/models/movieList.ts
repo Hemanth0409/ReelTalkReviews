@@ -7,5 +7,6 @@ export interface MovieList{
     filmCertificationId:number;
     isDeleted:boolean;
     createDate:Date;
-    ModifiedDate:Date;
+    modifiedDate:Date;
+    releaseDate:Date;
 }
