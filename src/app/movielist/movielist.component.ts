@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ColDef, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { MovieList } from 'src/models/movieList';
 import { AuthService } from 'src/services/auth.service';
 import { MovieDetailsService } from 'src/services/movie-details.service';
@@ -11,7 +12,7 @@ import { MovieDetailsService } from 'src/services/movie-details.service';
 })
 export class MovielistComponent implements OnInit {
 starRating!:number;
-  constructor(private movieService: MovieDetailsService, private auth: AuthService) { }
+  constructor(private movieService: MovieDetailsService, private auth: AuthService,private datePipe:DatePipe) { }
   movieList: MovieList[] = [];
   userRole!: string;
   colDefs: ColDef[] = [
@@ -19,7 +20,9 @@ starRating!:number;
     { field: 'movieType' },
     { field: 'movieRatingOverall' },
     { field: 'filmCertificationId' },
-    { field: 'releaseDate' }
+    { field: 'releaseDate',cellRenderer: (params: ICellRendererParams) => {
+      return `<p>${this.datePipe.transform(params.value)}</p>`;
+    } }
   ]
   defaultColDef: ColDef = {
     sortable: true, filter: true

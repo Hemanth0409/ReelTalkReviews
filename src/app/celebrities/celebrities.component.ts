@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ColDef, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { FilmIndustryMembers } from 'src/models/filmIndustryMembers';
 import { AuthService } from 'src/services/auth.service';
 import { CelebritiesService } from 'src/services/celebrities.service';
@@ -12,9 +13,13 @@ import { CelebritiesService } from 'src/services/celebrities.service';
 export class CelebritiesComponent implements OnInit {
   memberList: FilmIndustryMembers[] = []
   userRole!: string;
+
+
   colDefs: ColDef[] = [
     { field: 'memberName' },
-    { field: 'dateOfBirth' },
+    { field: 'dateOfBirth',cellRenderer: (params: ICellRendererParams) => {
+      return `<p>${this.datePipe.transform(params.value)}</p>`;
+    } },
     { field: 'memberDescription' },
     { field: 'gender' },
    
@@ -27,7 +32,7 @@ export class CelebritiesComponent implements OnInit {
     sortable: true, filter: true
   };
   
-  constructor(private members: CelebritiesService, private auth: AuthService) { }
+  constructor(private members: CelebritiesService, private auth: AuthService,private datePipe:DatePipe ) { }
 
   ngOnInit(): void {
     this.userRole = this.auth.getRole();

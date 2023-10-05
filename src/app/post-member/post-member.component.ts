@@ -33,7 +33,6 @@ export class PostMemberComponent implements OnInit {
     private alert: MessageService,
     private router: Router,
     private member: CelebritiesService,
-    private _formBuilder: FormBuilder
   ) {}
 
   memberDetail!: FormGroup;
@@ -59,15 +58,14 @@ export class PostMemberComponent implements OnInit {
     this.dateOfBirth = new FormControl('', [Validators.required]);
     this.memberDescription = new FormControl('', [Validators.required]);
     this.place = new FormControl('', [Validators.required]);
-    this.gender = new FormControl('', [Validators.required]);
-    this.genderValue = new FormControl('', [Validators.required]);
+    this.gender = new FormControl(this.genderValue, [Validators.required]);
 
     this.memberDetail = new FormGroup({
       memberName: this.memberName,
       // memberPic: this.memberPic,
       dateOfBirth: this.dateOfBirth,
       memberDescription: this.memberDescription,
-      gender: this.genderValue,
+      gender: this.gender,
       place: this.place,
       isWriter: new FormControl(false),
       isCinematographer: new FormControl(false),

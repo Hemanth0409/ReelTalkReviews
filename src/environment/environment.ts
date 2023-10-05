@@ -9,5 +9,6 @@ export const environment = {
   postMovie: 'https://localhost:7205/api/MovieDetails/PostMovieDetail',
   getFilmCertification:'https://localhost:7205/api/FilmCertifications/GetFilmCertifications',
   getFilmIndustryMembers:'https://localhost:7205/api/FilmIndustryMembers/GetFilmIndustryMembers',
-  postFilmIndustryMembers:'https://localhost:7205/api/FilmIndustryMembers/PostFilmIndustryMember'
+  postFilmIndustryMembers:'https://localhost:7205/api/FilmIndustryMembers/PostFilmIndustryMember',
+  postMovieRating:'https://localhost:7205/api/MovieRatings/PostMovieRating'
 }

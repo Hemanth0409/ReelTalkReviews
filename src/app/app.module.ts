@@ -19,7 +19,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
-import {JsonPipe} from '@angular/common';
+import {DatePipe, JsonPipe} from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
@@ -85,7 +85,7 @@ import { ViewMovieComponent } from './movielist/view-movie/view-movie.component'
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
     multi:true
-  },MessageService 
+  },MessageService ,DatePipe
   ],
   bootstrap: [AppComponent]
 })
