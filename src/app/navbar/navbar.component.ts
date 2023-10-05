@@ -10,9 +10,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public name: string = "";
+  public name!: string;
+  public id!:string;
   public role!: string;
   hide!: boolean;
+  display!:boolean;
   constructor(private login: RegisterationService, private auth: AuthService, private userDetail: UserDetailService, private router: Router) {
   }
   logout() {
@@ -33,13 +35,14 @@ export class NavbarComponent implements OnInit {
     })
 
   }
-
-
-
   ngOnInit(): void {
     const token = this.auth.getToken();
+    
+    this.auth.currentStatus.subscribe((res)=>{
+      this.display=res;
+    });
     const refreshToken = this.auth.getRefreshToken();
-    if (token && refreshToken) {
+    if (token || refreshToken) {
       this.hide = false;
     }
     else {
@@ -50,9 +53,13 @@ export class NavbarComponent implements OnInit {
       this.name = val || nameForToken;
       console.log(this.name)
     })
-    this.userDetail.getRole().subscribe((val) => {
+    this.userDetail.getRole().subscribe((val2) => {
       let roleFromToken = this.auth.getRole();
-      this.role = val || roleFromToken;
+      this.role = val2 || roleFromToken;
+    })
+    this.userDetail.getUserId().subscribe((val3) => {
+      let idFromToken = this.auth.getUserID();
+      this.id = val3 || idFromToken;
     })
   }
 

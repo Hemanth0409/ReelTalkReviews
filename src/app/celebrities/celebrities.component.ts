@@ -17,14 +17,20 @@ export class CelebritiesComponent implements OnInit {
     { field: 'dateOfBirth' },
     { field: 'memberDescription' },
     { field: 'gender' },
-    { field: 'place' },
-   ]
+   
+    {
+      headerName: 'Profession',
+      valueGetter: this.getProfession.bind(this), 
+    },
+  ];
   defaultColDef: ColDef = {
     sortable: true, filter: true
-  }
-  constructor(private members: CelebritiesService,private auth:AuthService) { }
+  };
+  
+  constructor(private members: CelebritiesService, private auth: AuthService) { }
+
   ngOnInit(): void {
-    this.userRole=this.auth.getRole();
+    this.userRole = this.auth.getRole();
     this.members.getFilmIndustyMembers().subscribe({
       next: (res) => {
         this.memberList = res;
@@ -34,6 +40,7 @@ export class CelebritiesComponent implements OnInit {
       },
     })
   }
+
   onGridReady(params: GridReadyEvent) {
     params.api.sizeColumnsToFit();
     window.addEventListener('resize', function () {
@@ -43,6 +50,19 @@ export class CelebritiesComponent implements OnInit {
     });
     params.api.sizeColumnsToFit();
   }
+
+  getProfession(params: any) {
+    const columnsToCombine = [
+      'isActor',
+      'isDirector',
+      'isMusicDirector',
+      'isProducer',
+      'isCinematographer',
+      'isWriter',
+    ];
+    const professionArray = columnsToCombine
+      .map((col) => params.data[col] ? col : null)
+      .filter((value) => value !== null);
+    return professionArray.length > 0 ? professionArray.join(', ') : '';
+  }
 }
-
-

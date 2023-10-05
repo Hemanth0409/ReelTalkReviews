@@ -36,23 +36,11 @@
                         </mat-form-field>
                     </div>
                 </div>
-
-                <!-- <div class="row d-flex">
-                    <div class="col">
-                        <mat-label>Gender</mat-label>
-                        <mat-radio-group aria-label="Select an option" formControlName="gender">
-                            <mat-radio-button value="1">Male</mat-radio-button>
-                            <mat-radio-button value="2">Female</mat-radio-button>
-                        </mat-radio-group>
-
-                    </div>
-                </div> -->
                 <label id="example-radio-group-label">Gender</label>
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="gender" [(ngModel)]="genderValue">
                     <mat-radio-button class="example-radio-button" *ngFor="let x of genderType" [value]="x">
                         {{x}} </mat-radio-button>
                 </mat-radio-group>
-                <div>Gender:{{genderValue}}</div>
 
                 <div class="row d-flex">
                     <div class="col">
@@ -64,7 +52,33 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row d-flex">
+                    <div class="col">
 
+
+                        <section class="example-section">
+                            <h4>Select your Profession:</h4>
+                            <p>
+                                <mat-checkbox formControlName="isMusicDirector" (change)="updateCheckbox('isMusicDirector', $event.checked)">Music Director</mat-checkbox>
+                            </p>
+                            <p>
+                                <mat-checkbox formControlName="isDirector" (change)="updateCheckbox('isDirector', $event.checked)">Director</mat-checkbox>
+                            </p>
+                            <p>
+                                <mat-checkbox formControlName="isActor" (change)="updateCheckbox('isActor', $event.checked)">Actor</mat-checkbox>
+                            </p>
+                            <p>
+                                <mat-checkbox formControlName="isProducer" (change)="updateCheckbox('isProducer', $event.checked)">Producer</mat-checkbox>
+                            </p>
+                            <p>
+                                <mat-checkbox formControlName="isCinematographer" (change)="updateCheckbox('isCinematographer', $event.checked)">Cinematographer</mat-checkbox>
+                            </p>
+                            <p>
+                                <mat-checkbox formControlName="isWriter" (change)="updateCheckbox('isWriter', $event.checked)">Writer</mat-checkbox>
+                            </p>
+                        </section>
+                    </div>
+                </div>
                 <div class="col pb-5  mt-5">
                     <button mat-raised-button color="primary" type="submit" class="example-full-width">
                         Register

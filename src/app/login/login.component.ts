@@ -107,11 +107,11 @@ export class LoginComponent implements OnInit {
             const tokenPayload = this.auth.decodeToken();
             this.userDetail.setFullName(tokenPayload.unique_name);
             this.userDetail.setRole(tokenPayload.role);
-            console.log(tokenPayload.role)
-
+            this.userDetail.setUserId(tokenPayload.sub);
+            console.log(tokenPayload.sub);
             this.router.navigate(['home']);
           },
-          error: (err) => {
+          error: (err) => { 
             console.log(err)
             const Toast = Swal.mixin({
               toast: true,
@@ -127,6 +127,6 @@ export class LoginComponent implements OnInit {
           }
         });
     }
+    this.auth.authStatus.next(false);
   }
 }
-

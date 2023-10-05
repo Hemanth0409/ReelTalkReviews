@@ -14,11 +14,14 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { MessageService, PrimeIcons } from 'primeng/api';
+import { MessageService} from 'primeng/api';
 import { AgGridModule } from 'ag-grid-angular';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import {JsonPipe} from '@angular/common';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +37,8 @@ import { ActionLinkComponent } from './action-link/action-link.component';
 import { PostMovieComponent } from './post-movie/post-movie.component';
 import { CelebritiesComponent } from './celebrities/celebrities.component';
 import { PostMemberComponent } from './post-member/post-member.component';
-
+import { RatingComponent } from './movielist/rating/rating.component';
+import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +54,8 @@ import { PostMemberComponent } from './post-member/post-member.component';
     PostMovieComponent,
     CelebritiesComponent,
     PostMemberComponent,
+    RatingComponent,
+    ViewMovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,9 @@ import { PostMemberComponent } from './post-member/post-member.component';
     AgGridModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    JsonPipe,
+    MatCheckboxModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

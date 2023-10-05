@@ -1,0 +1,24 @@
+<div class="flipper">
+    <div class="front text-center">
+        <div class="mt-2">
+            <!-- <img src="data:image;base64,@Convert.ToBase64String{{x.moviePoster}}" width="90" height="90" class="rounded-pill" /> -->
+        </div>
+        <div class="card-title  p-2 mt-3" (click)="viewMovie(movieDetail.movieId)">
+            <div><b>Movie Title:</b>{{movieDetail.movieTitle}}</div>
+            <div class="card-text">
+                <b>Movie Type:</b> {{movieDetail.movieType}}
+            </div>
+            <div class="card-text"><b>Film Certification:</b> {{movieDetail.filmCertificationId}}
+            </div>
+            <div class="card-text"><b>Overall Rating:</b> {{movieDetail.movieRatingOverall}}<i class="fa-solid fa-star"></i>
+                <button class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-star"></i> 
+            </button>
+            </div>
+            <div class="card-text"><b>Release Date:</b> {{movieDetail.releaseDate}}
+            </div>
+            <div>{{starRating}}</div>
+        </div>
+    </div>
+
+</div>

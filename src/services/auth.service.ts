@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environment/environment';
 import { TokenApiModel } from 'src/models/tokenApi.model';
 
@@ -9,6 +10,9 @@ import { TokenApiModel } from 'src/models/tokenApi.model';
 })
 export class AuthService {
   private userPayload: any;
+  public authStatus=new BehaviorSubject<boolean>(true);
+  public currentStatus = this.authStatus.asObservable();
+
   refreshURL=environment.userTokenRefresh
   constructor(private http:HttpClient) {
     this.userPayload = this.decodeToken();
@@ -39,7 +43,14 @@ export class AuthService {
   }
   getUserName() {
     if (this.userPayload){
+      console.log(this.userPayload.unique_name);
       return this.userPayload.unique_name;
+    }
+  }
+  getUserID(){
+    if(this.userPayload){
+      console.log(this.userPayload.sub);
+      return this.userPayload.sub;
     }
   }
   getRole() {

@@ -7,7 +7,7 @@
 
 </ng-container>
 <div class=" p-3 shadow" id="main-tab" *ngIf="userRole=='Admin'">
-    <h2 class="text-center p-3 text-dark">UserDetails</h2>
+    <h2 class="text-center p-3 text-dark">Movie Details</h2>
 
     <div class="tab-content p-3 border bg-light" id="nav-tabContent">
         <div class="tab-pane fade active show pb-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -18,39 +18,10 @@
 
                         <div class="col-md-4 " *ngFor="let x of movieList">
                             <div class="card">
-                                <div class="flipper">
-                                    <div class="front text-center">
-                                        <div class="mt-2">
-                                            <img src="data:image;base64,@Convert.ToBase64String(item.UserImg)" width="90" height="90" class="rounded-pill" />
-                                        </div>
-                                        <div class="card-title  p-2 mt-3">
-                                            <div><b>Movie Title:</b>{{x.movieTitle}}</div>
-                                            <div class="card-text">
-                                                <b>Movie Type:</b> {{x.movieType}}
-                                            </div>
-                                            <div class="card-text"><b>Film Certification:</b> {{x.filmCertificationId}}
-                                            </div>
-                                            <div class="card-text"><b>Release Date:</b> {{x.releaseDate}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="back">
-                                        <div><b>Date Of Birth:</b> @Html.DisplayFor(modelItem => item.DateOfBirth)</div>
-                                        <div class="card-text"><b>Weight:</b> @Html.DisplayFor(modelItem => item.weight) kg
-                                        </div>
-                                        <div class="card-text"> <b>Height:</b> @Html.DisplayFor(modelItem => item.Height) cm </div>
-                                        <div class="card-text"> <b>Gender:</b> @Html.DisplayFor(modelItem => item.GenderType.Gender) </div>
-                                        <div class="card-text"> <b>Joined Date :</b> @Html.DisplayFor(modelItem => item.JoiningData) </div>
-                                        <div class="text-center">
 
-
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <app-rating [movieDetail]="x"></app-rating>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>

@@ -9,6 +9,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { PostMovieComponent } from './post-movie/post-movie.component';
 import { CelebritiesComponent } from './celebrities/celebrities.component';
 import { PostMemberComponent } from './post-member/post-member.component';
+import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -20,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,canActivate:[authGuard]
+    component: HomeComponent, canActivate: [authGuard]
   },
   {
     path: 'movie',
@@ -29,18 +31,21 @@ const routes: Routes = [
   ,
   {
     path: 'users',
-    component: UserDetailsComponent,canActivate:[authGuard]
+    component: UserDetailsComponent, canActivate: [authGuard]
   },
   {
     path: 'postmovie',
-    component: PostMovieComponent,canActivate:[authGuard]
+    component: PostMovieComponent, canActivate: [authGuard]
   },
   {
     path: 'celebrities',
-    component: CelebritiesComponent,canActivate:[authGuard] 
-  },{
-    path:'postmembers',
-    component:PostMemberComponent,canActivate:[authGuard]
+    component: CelebritiesComponent, canActivate: [authGuard]
+  }, {
+    path: 'postmembers',
+    component: PostMemberComponent, canActivate: [authGuard]
+  }, {
+    path: 'viewMovie/:id',
+    component: ViewMovieComponent
   }
 ];
 
