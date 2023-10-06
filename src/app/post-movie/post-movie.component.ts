@@ -33,13 +33,15 @@ export class PostMovieComponent implements OnInit {
   movieTitle!: FormControl;
   movieType!: FormControl;
   moviePoster!: FormControl;
+  moviePoster2!: FormControl;
   releaseDate!: FormControl;
   movieDescription!: FormControl;
   filmCertificationId!: FormControl;
   matcher = new MyErrorStateMatcher();
   filmCertificationList!: FilmCertifications | any;
   selectedFilmCertification!: FilmCertifications;
-  public response!: { dbPath: '' }
+  public response!: { dbPath: '' };
+
 
   ngOnInit(): void {
 
@@ -49,6 +51,7 @@ export class PostMovieComponent implements OnInit {
     this.filmCertificationId = new FormControl('', [Validators.required]);
     this.releaseDate = new FormControl('', [Validators.required]);
     this.movieDescription = new FormControl('', [Validators.required]);
+    this.moviePoster2 = new FormControl('', [Validators.required]);
 
     this.movieDetails = new FormGroup({
       movieTitle: this.movieTitle,
@@ -56,7 +59,8 @@ export class PostMovieComponent implements OnInit {
       releaseDate: this.releaseDate,
       filmCertificationId: this.filmCertificationId,
       movieDescription: this.movieDescription,
-      moviePoster: this.moviePoster
+      moviePoster: this.moviePoster,
+      moviePoster2:this.moviePoster2
     });
     this.movieDetail.getFilmCertification().subscribe(
       (res) => {
@@ -69,6 +73,10 @@ export class PostMovieComponent implements OnInit {
   public uploadFinished = (event: any) => {
     this.response = event;
     this.moviePoster.setValue(this.response.dbPath);
+  }
+  public uploadFinished2 = (event: any) => {
+    this.response = event;
+    this.moviePoster2.setValue(this.response.dbPath);
   }
   onSubmit() {
     if (this.movieDetails.valid) {

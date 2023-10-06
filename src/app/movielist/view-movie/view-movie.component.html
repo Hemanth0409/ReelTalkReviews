@@ -1,50 +1,12 @@
-<!-- <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3 col-sm-12">
-        <h3 class="text-center p-3">Rate or Update Movie</h3>
-        <form class="example-form container" [formGroup]="reviewDetail" (ngSubmit)="onSubmit()" novalidate>
-  
-          <input matInput formControlName="movieId" [errorStateMatcher]="matcher" hidden>
-          <input matInput formControlName="userId" [errorStateMatcher]="matcher" hidden>
-  
-          <div class="row d-flex">
-            <div class="col">
-              <mat-form-field class="example-full-width form-group">
-                <mat-label>Rating</mat-label>
-                <input matInput formControlName="rating" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="rating.hasError('required')">Rating is required</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row d-flex">
-            <div class="col">
-              <mat-form-field class="example-full-width form-group">
-                <mat-label>Review</mat-label>
-                <input matInput formControlName="review" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="review.hasError('required')">Review is required</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-          <p>Rating Count: {{ ratingCount }}</p>
-          <div class="col pb-5 mt-5">
-            <button mat-raised-button color="primary" type="submit" class="example-full-width">
-              {{ existingRating !== null ? 'Update Rating' : 'Submit Rating' }}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-   -->
 <form class="example-form container" [formGroup]="reviewDetail" (ngSubmit)="reviewDetail.valid && onSubmit()" novalidate
     novalidate>
 
-    <div class="container-fluid bg-dark">
+    <div class="container-fluid bg-dark mt-5">
         <div class="container  align-items-center d-flex flex-column">
             <div class="row w-100" id="bg-main-row">
-                <div class="row text-white fs-1">
+                <div class="row text-white fs-1 mt-5 ">
                     <p>{{movieList.movieTitle|uppercase}}</p>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center mt-3">
                         <p class="r-date">{{movieList.movieType|uppercase}}</p>
                         <p class="r-date">&nbsp;&#x2022;</p>
                         <p class="ms-1 r-date">{{movieList.releaseDate|date}}</p>
@@ -56,13 +18,13 @@
                         alt="movie poster">
                 </div>
                 <div class="col-sm-6 col-md-7 d-none d-sm-block" id="s-col-poster">
-                    <img src="{{'https://localhost:7205/'+movieList.moviePoster}}" class="img-fluid" id="sm-poster"
+                    <img src="{{'https://localhost:7205/'+movieList.moviePoster2}}" class="img-fluid" id="sm-poster"
                         alt="movie poster">
                 </div>
                 <div class=" col-md-2" id="t-col-poster">
                     <div class="row mx-1 h-100 d-flex flex-row" id="rating-card">
-                        <div class="card justify-content-center align-items-center">
-                            <p class="fs-5 text-white">RTR Rating</p>
+                        <div class="card py-2 justify-content-center align-items-center">
+                            <p class="fs-5 text-white">MDB Rating</p>
                             <p class="text-secondary fs-4"><i class="fa-solid fa-star" id="gold-star"></i>
                                 <b>{{movieList.movieRatingOverall}}({{movieList.ratingCount}}k)</b>
                             </p>
@@ -76,25 +38,26 @@
             </div>
             <div class="row mt-md-1 p-0 w-100 justify-content-center gy-2 gy-lg-0">
                 <div class="col-12 col-lg-8" id="fr-col-rating">
-                    <div class="description text-white text-center text-lg-start">
+                    <div class="description text-white text-center text-lg-start mt-md-2 mb-3">
                         <p>{{movieList.movieDescription}}
                         </p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4" id="fv-col-rating">
-                    <div class="your-rate p-2">
+                    <div class="your-rate px-5 p-md-2">
                         <div class="row text-center text-lg-start">
                             <h4 class="text-white">
                                 Your Rating
                             </h4>
                         </div>
 
-                        <div class="card flex justify-content-center">
-                            <p-rating [(ngModel)]="value" [cancel]="false" formControlName="rating"
+                        <div class="card flex justify-content-center bg-transparent border-0">
+                            <p-rating [(ngModel)]="value" [cancel]="false"
+                                class="text-center ui-rating text-white justify-content-around" formControlName="rating"
                                 [stars]="starsCount"></p-rating>
 
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <mat-form-field class="example-full-width form-group">
                                 <input matInput formControlName="review" [errorStateMatcher]="matcher">
                             </mat-form-field>

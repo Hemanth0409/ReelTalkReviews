@@ -11,7 +11,7 @@ p {
 
 #sm-poster {
     width: 100%;
-    height: 70%;
+    height: 100%;
 
 }
 
@@ -160,11 +160,18 @@ p {
     }
 
     #t-col-poster {
-        height: 120px;
+        height: 100px;
         padding: 0% !important;
     }
 
     .your-rate h4 {
         margin-left: 0em;
+    }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 767px) {
+    .ui-rating {
+       margin-left: -4em;
     }
 }

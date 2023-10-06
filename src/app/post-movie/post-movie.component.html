@@ -62,7 +62,11 @@
                         </mat-form-field>
                     </div>
                 </div>
-               <app-upload-img (onUploadFinished)="uploadFinished($event)"></app-upload-img>
+                <mat-label>Upoload First Look</mat-label>
+                <app-upload-img (onUploadFinished)="uploadFinished($event)"></app-upload-img>
+                <mat-label>Upload Movie Poster</mat-label>
+                <app-upload-img (onUploadFinished)="uploadFinished2($event)"></app-upload-img>
+
                 <div class="col pb-5  mt-5">
                     <button mat-raised-button color="primary" type="submit" class="example-full-width">
                         Register
