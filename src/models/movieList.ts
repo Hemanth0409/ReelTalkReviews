@@ -9,4 +9,5 @@ export interface MovieList{
     createDate:Date;
     modifiedDate:Date;
     releaseDate:Date;
+    ratingCount:number;
 }

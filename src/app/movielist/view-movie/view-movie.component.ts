@@ -5,19 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieList } from 'src/models/movieList';
 import { AuthService } from 'src/services/auth.service';
 import { MovieDetailsService } from 'src/services/movie-details.service';
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
   ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
+
 @Component({
   selector: 'app-view-movie',
   templateUrl: './view-movie.component.html',
@@ -27,6 +25,8 @@ export class ViewMovieComponent implements OnInit {
   alert: any;
   constructor(private actRoute: ActivatedRoute, private router: Router, private auth: AuthService, private movieService: MovieDetailsService) { }
   currentMovieId!: number;
+  numUserId!: number;
+  numMovieId!: number;
   movieList: MovieList[] = [];
   reviewDetail!: FormGroup;
   rating!: FormControl;
@@ -34,6 +34,9 @@ export class ViewMovieComponent implements OnInit {
   userId!: FormControl;
   movieId!: FormControl;
   currentUserId!: number;
+  existingRating: number | null = null;
+  ratingCount: number = 0; // Initialize with zero
+
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
@@ -47,38 +50,81 @@ export class ViewMovieComponent implements OnInit {
         console.log(err);
       },
     });
-    this.currentUserId = Number(this.currentUserId);
-    this.currentMovieId = Number(this.currentMovieId); 
-    this.userId = new FormControl(this.currentUserId);
-    this.movieId = new FormControl(this.currentMovieId);
+    this.numUserId = Number(this.currentUserId);
+    this.numMovieId = Number(this.currentMovieId);
+    this.userId = new FormControl(this.numUserId);
+    this.movieId = new FormControl(this.numMovieId);
     this.rating = new FormControl('', [Validators.required]);
     this.review = new FormControl('', [Validators.required]);
     this.reviewDetail = new FormGroup({
-      movieId:this.movieId,
-      userId:this.userId,
+      movieId: this.movieId,
+      userId: this.userId,
       rating: this.rating,
       review: this.review,
-    })
+    });
+
+    // Check if the user has already rated this movie
+    this.movieService.getUserRating(this.numUserId, this.numMovieId).subscribe({
+      next: (rating) => {
+        this.existingRating = rating;
+        if (this.existingRating !== null) {
+          this.rating.setValue(this.existingRating);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+
+    this.fetchRatingCount();
   }
+
+  fetchRatingCount() {
+    this.movieService.getRatingCountForMovie(this.numMovieId).subscribe(
+      (count) => {
+        this.ratingCount = count;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   onSubmit() {
     if (this.reviewDetail.valid) {
-      console.log(this.reviewDetail.value);
-      this.movieService.postMovieRating(this.reviewDetail.value).subscribe({
-        next: () => {
-          this.router.navigate(['/celebrities']);
-        },
-        error: (error) => {
-
-          console.log(error, "djsf");
-          this.alert.add({
-            key: 'tc',
-            severity: 'error',
-            summary: 'Try again later',
-            detail: 'Something went wrong',
-          });
-        },
-      });
+      if (this.existingRating === null) {
+        // User hasn't rated this movie before, so create a new rating
+        this.movieService.postMovieRating(this.reviewDetail.value).subscribe({
+          next: () => {
+            this.router.navigate(['/movie']);
+          },
+          error: (error) => {
+            console.log(error);
+            this.alert.add({
+              key: 'tc',
+              severity: 'error',
+              summary: 'Try again later',
+              detail: 'Something went wrong',
+            });
+          },
+        });
+      } else {
+        // User has already rated this movie, so update the existing rating
+        this.movieService.updateMovieRating(this.existingRating, this.reviewDetail.value).subscribe({
+          next: () => {
+            this.router.navigate(['/movie']);
+          },
+          error: (error) => {
+            console.log(error);
+            this.alert.add({
+              key: 'tc',
+              severity: 'error',
+              summary: 'Try again later',
+              detail: 'Something went wrong',
+            });
+          },
+        });
+      }
     }
   }
-
 }

@@ -4,6 +4,7 @@ import { MovieList } from 'src/models/movieList';
 import { environment } from 'src/environment/environment'
 import { FilmCertifications } from 'src/models/filmCertification';
 import { Rating } from 'src/models/rating';
+import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,7 @@ export class MovieDetailsService {
   postMovie = environment.postMovie;
   filmCertification=environment.getFilmCertification;
   postMovieRatingUrl=environment.postMovieRating;
+  baseUrl=environment.baseUrl;
   constructor(private http: HttpClient) { }
   getMovieDetails() {
     return this.http.get<MovieList[]>(this.movieDetails);
@@ -24,6 +26,29 @@ export class MovieDetailsService {
   }
   postMovieRating(ratingForm:Rating){
     return this.http.post<Rating>(this.postMovieRatingUrl,ratingForm);
+  }
+  getUserRating(userId: number, movieId: number): Observable<number | null> {
+    const url = `${this.baseUrl}/api/MovieRatings/user-rating?userId=${userId}&movieId=${movieId}`;
+    return this.http.get<number | null>(url);
+  }
+  
+  // Make an HTTP PUT or PATCH request to update the user's rating for a specific movie
+  updateUserRating(userId: number, movieId: number, newRating: number): Observable<void> {
+    const url = `${this.baseUrl}/api/MovieRatings/${userId}/${movieId}`;
+    const body = {
+      rating: newRating,
+    };
+    return this.http.put<void>(url, body);
+  }
+  getRatingCountForMovie(movieId: number): Observable<number> {
+    const url = `${this.baseUrl}/api/MovieRatings/count/${movieId}`;
+    return this.http.get<number>(url);
+  }
+  updateMovieRating(existingRatingId: number, updatedRatingData: any): Observable<any> {
+    const url = `${this.baseUrl}/api/MovieRatings/${existingRatingId}`;
+
+    // Send an HTTP PUT request to update the existing rating
+    return this.http.put(url, updatedRatingData);
   }
 }
 
