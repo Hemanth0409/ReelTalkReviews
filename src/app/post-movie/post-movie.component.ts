@@ -6,6 +6,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { FilmCertifications } from 'src/models/filmCertification';
+import { FilmIndustryMembers } from 'src/models/filmIndustryMembers';
+import { CelebritiesService } from 'src/services/celebrities.service';
 import { MovieDetailsService } from 'src/services/movie-details.service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -27,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PostMovieComponent implements OnInit {
 
-  constructor(private alert: MessageService, private router: Router, private movieDetail: MovieDetailsService) { }
+  constructor(private alert: MessageService, private router: Router, private movieDetail: MovieDetailsService,private member:CelebritiesService) { }
 
   movieDetails!: FormGroup;
   movieTitle!: FormControl;
@@ -36,10 +38,17 @@ export class PostMovieComponent implements OnInit {
   moviePoster2!: FormControl;
   releaseDate!: FormControl;
   movieDescription!: FormControl;
+  actor1!:FormControl;
+  actor2!:FormControl;
+  actor3!:FormControl;
+  musicDirector!:FormControl;
+  director!:FormControl;
+
   filmCertificationId!: FormControl;
   matcher = new MyErrorStateMatcher();
-  filmCertificationList!: FilmCertifications | any;
+  filmCertificationList!: FilmCertifications|any;
   selectedFilmCertification!: FilmCertifications;
+
   public response!: { dbPath: '' };
 
 
@@ -52,7 +61,12 @@ export class PostMovieComponent implements OnInit {
     this.releaseDate = new FormControl('', [Validators.required]);
     this.movieDescription = new FormControl('', [Validators.required]);
     this.moviePoster2 = new FormControl('', [Validators.required]);
-
+    this.actor1 = new FormControl('', [Validators.required]);
+    this.actor2 = new FormControl('', [Validators.required]);
+    this.actor3 = new FormControl('', [Validators.required]);
+    this.director = new FormControl('', [Validators.required]);
+    this.musicDirector = new FormControl('', [Validators.required]);
+    
     this.movieDetails = new FormGroup({
       movieTitle: this.movieTitle,
       movieType: this.movieType,
@@ -60,14 +74,18 @@ export class PostMovieComponent implements OnInit {
       filmCertificationId: this.filmCertificationId,
       movieDescription: this.movieDescription,
       moviePoster: this.moviePoster,
-      moviePoster2:this.moviePoster2
+      moviePoster2: this.moviePoster2,
+      actor1:this.actor1,
+      actor2:this.actor2,
+      actor3:this.actor3,
+      director:this.director,
+      musicDirector:this.musicDirector
     });
     this.movieDetail.getFilmCertification().subscribe(
       (res) => {
         this.filmCertificationList = res;
         console.log(this.filmCertificationList);
       });
-
 
   }
   public uploadFinished = (event: any) => {

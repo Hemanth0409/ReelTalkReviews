@@ -12,5 +12,9 @@ export interface MovieList{
     releaseDate:Date;
     ratingCount:number;
     movieDescription:string;
-    
+    actor1:string;
+    actor2:string;
+    actor3:string;
+    director:string;
+    musicDirector:string;
 }

@@ -40,7 +40,12 @@ export class ViewMovieComponent implements OnInit {
     releaseDate: new (Date),
     ratingCount: 0,
     movieDescription: '',
-    moviePoster2: ''
+    moviePoster2: '',
+    actor1: '',
+    actor2: '',
+    actor3: '',
+    director: '',
+    musicDirector: ''
   };
   value!: number;
   starsCount: number = 10; // This is the numeric variable for stars.
