@@ -27,7 +27,24 @@ export class ViewMovieComponent implements OnInit {
   currentMovieId!: number;
   numUserId!: number;
   numMovieId!: number;
-  movieList: MovieList[] = [];
+  movieList: MovieList = {
+    movieId: 0,
+    movieTitle: '',
+    movieType: '',
+    moviePoster: '',
+    movieRatingOverall: 0,
+    filmCertificationId: 0,
+    isDeleted: false,
+    createDate: new (Date),
+    modifiedDate: new (Date),
+    releaseDate: new (Date),
+    ratingCount: 0,
+    movieDescription: ''
+  };
+  value!: number;
+  starsCount: number = 10; // This is the numeric variable for stars.
+
+
   reviewDetail!: FormGroup;
   rating!: FormControl;
   review!: FormControl;
@@ -42,7 +59,10 @@ export class ViewMovieComponent implements OnInit {
   ngOnInit(): void {
     this.currentUserId = this.auth.getUserID();
     this.currentMovieId = this.actRoute.snapshot.params['id'];
-    this.movieService.getMovieDetails().subscribe({
+    this.numUserId = Number(this.currentUserId);
+    this.numMovieId = Number(this.currentMovieId);
+    console.log(this.value);
+    this.movieService.getMovieDetailId(this.numMovieId).subscribe({
       next: (res) => {
         this.movieList = res;
       },
@@ -50,12 +70,11 @@ export class ViewMovieComponent implements OnInit {
         console.log(err);
       },
     });
-    this.numUserId = Number(this.currentUserId);
-    this.numMovieId = Number(this.currentMovieId);
+
     this.userId = new FormControl(this.numUserId);
     this.movieId = new FormControl(this.numMovieId);
-    this.rating = new FormControl('', [Validators.required]);
-    this.review = new FormControl('', [Validators.required]);
+    this.rating = new FormControl(this.value);
+    this.review = new FormControl('');
     this.reviewDetail = new FormGroup({
       movieId: this.movieId,
       userId: this.userId,
@@ -63,68 +82,27 @@ export class ViewMovieComponent implements OnInit {
       review: this.review,
     });
 
-    // Check if the user has already rated this movie
-    this.movieService.getUserRating(this.numUserId, this.numMovieId).subscribe({
-      next: (rating) => {
-        this.existingRating = rating;
-        if (this.existingRating !== null) {
-          this.rating.setValue(this.existingRating);
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-
-    this.fetchRatingCount();
   }
 
-  fetchRatingCount() {
-    this.movieService.getRatingCountForMovie(this.numMovieId).subscribe(
-      (count) => {
-        this.ratingCount = count;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+
 
   onSubmit() {
     if (this.reviewDetail.valid) {
-      if (this.existingRating === null) {
-        // User hasn't rated this movie before, so create a new rating
-        this.movieService.postMovieRating(this.reviewDetail.value).subscribe({
-          next: () => {
-            this.router.navigate(['/movie']);
-          },
-          error: (error) => {
-            console.log(error);
-            this.alert.add({
-              key: 'tc',
-              severity: 'error',
-              summary: 'Try again later',
-              detail: 'Something went wrong',
-            });
-          },
-        });
-      } else {
-        // User has already rated this movie, so update the existing rating
-        this.movieService.updateMovieRating(this.existingRating, this.reviewDetail.value).subscribe({
-          next: () => {
-            this.router.navigate(['/movie']);
-          },
-          error: (error) => {
-            console.log(error);
-            this.alert.add({
-              key: 'tc',
-              severity: 'error',
-              summary: 'Try again later',
-              detail: 'Something went wrong',
-            });
-          },
-        });
-      }
+      console.log(this.reviewDetail.value)
+      this.movieService.postMovieRating(this.reviewDetail.value).subscribe({
+        next: () => {
+          this.router.navigate(['/movie']);
+        },
+        error: (error) => {
+          console.log(error);
+          this.alert.add({
+            key: 'tc',
+            severity: 'error',
+            summary: 'Try again later',
+            detail: 'Something went wrong',
+          });
+        },
+      });
     }
   }
 }

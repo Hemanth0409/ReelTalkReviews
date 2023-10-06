@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5">
+<!-- <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
       <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3 col-sm-12">
         <h3 class="text-center p-3">Rate or Update Movie</h3>
@@ -35,4 +35,78 @@
       </div>
     </div>
   </div>
-  
+   -->
+<form class="example-form container" [formGroup]="reviewDetail" (ngSubmit)="reviewDetail.valid && onSubmit()" novalidate
+    novalidate>
+
+    <div class="container-fluid bg-dark">
+        <div class="container  align-items-center d-flex flex-column">
+            <div class="row w-100" id="bg-main-row">
+                <div class="row text-white fs-1">
+                    <p>{{movieList.movieTitle|uppercase}}</p>
+                    <div class="d-flex align-items-center">
+                        <p class="r-date">{{movieList.movieType|uppercase}}</p>
+                        <p class="r-date">&nbsp;&#x2022;</p>
+                        <p class="ms-1 r-date">{{movieList.releaseDate|date}}</p>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 col-md-3" id="f-col-poster">
+                    <img src="{{'https://localhost:7205/'+movieList.moviePoster}}" class="img-fluid" id="sm-poster"
+                        alt="movie poster">
+                </div>
+                <div class="col-sm-6 col-md-7 d-none d-sm-block" id="s-col-poster">
+                    <img src="{{'https://localhost:7205/'+movieList.moviePoster}}" class="img-fluid" id="sm-poster"
+                        alt="movie poster">
+                </div>
+                <div class=" col-md-2" id="t-col-poster">
+                    <div class="row mx-1 h-100 d-flex flex-row" id="rating-card">
+                        <div class="card justify-content-center align-items-center">
+                            <p class="fs-5 text-white">RTR Rating</p>
+                            <p class="text-secondary fs-4"><i class="fa-solid fa-star" id="gold-star"></i>
+                                <b>{{movieList.movieRatingOverall}}({{movieList.ratingCount}}k)</b>
+                            </p>
+                        </div>
+                        <div class="card justify-content-center align-items-center mt-1">
+                            <p class="fs-4 text-white">{{movieList.filmCertificationId}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-md-1 p-0 w-100 justify-content-center gy-2 gy-lg-0">
+                <div class="col-12 col-lg-8" id="fr-col-rating">
+                    <div class="description text-white text-center text-lg-start">
+                        <p>{{movieList.movieDescription}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4" id="fv-col-rating">
+                    <div class="your-rate p-2">
+                        <div class="row text-center text-lg-start">
+                            <h4 class="text-white">
+                                Your Rating
+                            </h4>
+                        </div>
+
+                        <div class="card flex justify-content-center">
+                            <p-rating [(ngModel)]="value" [cancel]="false" formControlName="rating"
+                                [stars]="starsCount"></p-rating>
+
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="example-full-width form-group">
+                                <input matInput formControlName="review" [errorStateMatcher]="matcher">
+                            </mat-form-field>
+                        </div>
+                        <div class="  text-center   ">
+                            <button mat-raised-button color="primary" type="submit" class="example-full-width col-6">
+                                Rate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

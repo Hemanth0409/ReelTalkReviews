@@ -3,7 +3,8 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 shadow-lg mt-5 mb-5 text-center rounded-3  col-sm-12">
             <h3 class="text-center p-3">Movie Registration</h3>
-            <form class="example-form container" [formGroup]="movieDetails" (ngSubmit)="movieDetails.valid && onSubmit()" novalidate>
+            <form class="example-form container" [formGroup]="movieDetails"
+                (ngSubmit)="movieDetails.valid && onSubmit()" novalidate>
                 <div class="row d-flex">
                     <div class="col">
                         <mat-form-field class="example-full-width form-group">
@@ -26,6 +27,16 @@
                 <div class="row d-flex">
                     <div class="col">
                         <mat-form-field class="example-full-width form-group">
+                            <mat-label>Movie Description</mat-label>
+                            <input matInput formControlName="movieDescription" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="movieDescription.hasError('required')">
+                                Movie Description is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+              <div class="row d-flex">
+                    <div class="col">
+                        <mat-form-field class="example-full-width form-group">
                             <mat-label>Film Certification</mat-label>
                             <mat-select formControlName="filmCertificationId" id="certificationId" [(ngModel)]="selectedFilmCertification" [ngClass]="{'is-invalid':filmCertificationId.errors && (filmCertificationId.touched || filmCertificationId.dirty)}">
                                 <mat-option *ngFor="let film  of filmCertificationList" [value]="film.filmCertificationId">
@@ -36,6 +47,7 @@
                         </mat-form-field>
                     </div>
                 </div>
+
 
                 <div class="row d-flex">
                     <div class="col">
@@ -50,6 +62,7 @@
                         </mat-form-field>
                     </div>
                 </div>
+               <app-upload-img (onUploadFinished)="uploadFinished($event)"></app-upload-img>
                 <div class="col pb-5  mt-5">
                     <button mat-raised-button color="primary" type="submit" class="example-full-width">
                         Register

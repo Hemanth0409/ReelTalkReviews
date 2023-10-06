@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -26,19 +27,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PostMovieComponent implements OnInit {
 
-  constructor( private alert: MessageService, private router: Router,private movieDetail:MovieDetailsService) { }
+  constructor(private alert: MessageService, private router: Router, private movieDetail: MovieDetailsService) { }
 
   movieDetails!: FormGroup;
   movieTitle!: FormControl;
   movieType!: FormControl;
   moviePoster!: FormControl;
-  releaseDate!:FormControl;
+  releaseDate!: FormControl;
+  movieDescription!: FormControl;
   filmCertificationId!: FormControl;
   matcher = new MyErrorStateMatcher();
-  filmCertificationList!:FilmCertifications|any ;
-  selectedFilmCertification!:FilmCertifications ;
-
-
+  filmCertificationList!: FilmCertifications | any;
+  selectedFilmCertification!: FilmCertifications;
+  public response!: { dbPath: '' }
 
   ngOnInit(): void {
 
@@ -47,19 +48,28 @@ export class PostMovieComponent implements OnInit {
     this.moviePoster = new FormControl('', [Validators.required]);
     this.filmCertificationId = new FormControl('', [Validators.required]);
     this.releaseDate = new FormControl('', [Validators.required]);
+    this.movieDescription = new FormControl('', [Validators.required]);
+
     this.movieDetails = new FormGroup({
       movieTitle: this.movieTitle,
       movieType: this.movieType,
-      releaseDate:this.releaseDate,
+      releaseDate: this.releaseDate,
       filmCertificationId: this.filmCertificationId,
+      movieDescription: this.movieDescription,
+      moviePoster: this.moviePoster
     });
     this.movieDetail.getFilmCertification().subscribe(
       (res) => {
         this.filmCertificationList = res;
         console.log(this.filmCertificationList);
       });
-  }
 
+
+  }
+  public uploadFinished = (event: any) => {
+    this.response = event;
+    this.moviePoster.setValue(this.response.dbPath);
+  }
   onSubmit() {
     if (this.movieDetails.valid) {
       console.log(this.movieDetails.value)

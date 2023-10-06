@@ -33,7 +33,7 @@ export class PostMemberComponent implements OnInit {
     private alert: MessageService,
     private router: Router,
     private member: CelebritiesService,
-  ) {}
+  ) { }
 
   memberDetail!: FormGroup;
   memberName!: FormControl;
@@ -51,6 +51,8 @@ export class PostMemberComponent implements OnInit {
   topping!: FormGroup;
   isDeleted!: FormControl;
   matcher = new MyErrorStateMatcher();
+  public response!: { dbPath: '' }
+
 
   ngOnInit(): void {
     this.memberName = new FormControl('', [Validators.required]);
@@ -62,7 +64,7 @@ export class PostMemberComponent implements OnInit {
 
     this.memberDetail = new FormGroup({
       memberName: this.memberName,
-      // memberPic: this.memberPic,
+      memberPic: this.memberPic,
       dateOfBirth: this.dateOfBirth,
       memberDescription: this.memberDescription,
       gender: this.gender,
@@ -75,16 +77,20 @@ export class PostMemberComponent implements OnInit {
       isMusicDirector: new FormControl(false),
     });
   }
-
+  public uploadFinished = (event: any) => {
+    this.response = event;
+    this.memberPic.setValue(this.response.dbPath);
+  }
   onSubmit() {
+
     if (this.memberDetail.valid) {
-      console.log(this.memberDetail.value);
       this.member.postMemberDetail(this.memberDetail.value).subscribe({
         next: () => {
+          console.log(this.memberDetail.value);
           this.router.navigate(['/celebrities']);
         },
         error: (error) => {
-          console.log(error);
+          console.error('API Error:', error); // Log the error to the console.
           this.alert.add({
             key: 'tc',
             severity: 'error',
@@ -95,6 +101,7 @@ export class PostMemberComponent implements OnInit {
       });
     }
   }
+
 
   updateCheckbox(controlName: string, isChecked: boolean) {
     this.memberDetail.get(controlName)?.setValue(isChecked);

@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   avatarList: any[] = [];
   selected_Avatar: string = '';
   matcher = new MyErrorStateMatcher();
-
+  public response!:{dbPath:''}
 
   ngOnInit(): void {
 
@@ -51,10 +51,7 @@ export class RegisterComponent implements OnInit {
     ]);
 
     this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.characterName = ["Punk", "Asian", "Afrohair", "Normiefemale", "Older", "Firehair", "Batman", "Wonder", "Superman", "Aesthetic", "Monkey", "Hero", "Villain", "Happy", "Romeo", "Cute", "Cool", "Angry", "Crazy"];
-    for (const charname of this.characterName) {
-      this.avatarList.push("https://api.multiavatar.com/" + charname + ".png?apikey=2PhfABEQ49tC1k");
-    }
+   
     this.password = new FormControl('', [
       Validators.required,
       Validators.pattern(
@@ -74,12 +71,14 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      avatar: this.displayPic,
+      displayPic: this.displayPic,
     });
   }
-  avatar_click(img: string) {
-    this.selected_Avatar = img;
+  public uploadFinished=(event :any)=>{
+    this.response=event;
+    this.displayPic.setValue(this.response.dbPath);
   }
+
   onSubmit() {
     if (this.UserDetail.valid) {
       this.registeration.register(this.UserDetail.value).subscribe(

@@ -1,30 +1,27 @@
 <ng-container *ngIf="userRole=='Admin'">
 
     <a routerLink="/postmovie"><button class="btn btn-dark tex-white float-end mt-2 me-3">Add Movies</button></a>
-    <ag-grid-angular [rowData]="movieList" [columnDefs]="colDefs" class="ag-theme-alpine mt-5" style="width: 100%; height: 100%;" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef" [rowSelection]="'multiple'" [animateRows]="true">
+    <ag-grid-angular [rowData]="movieList" [columnDefs]="colDefs" class="ag-theme-alpine mt-5"
+        style="width: 100%; height: 70%;" (gridReady)="onGridReady($event)" [defaultColDef]="defaultColDef"
+        [rowSelection]="'multiple'" [animateRows]="true" [pagination]="true">
 
     </ag-grid-angular>
 
 </ng-container>
-<div class=" p-3 shadow" id="main-tab" *ngIf="userRole=='Admin'">
-    <h2 class="text-center p-3 text-dark">Movie Details</h2>
 
-    <div class="tab-content p-3 border bg-light" id="nav-tabContent">
-        <div class="tab-pane fade active show pb-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
-            <section class="cards mt-5">
+<body>
+    <div class=" p-3 shadow" id="main-tab" *ngIf="userRole=='Admin'">
+        <h2 class="text-center p-3 text-dark">Movie Details</h2>
+        <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+            <div class="tab-pane fade active show pb-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="container">
-                    <div class="row gy-4">
-
-                        <div class="col-md-4 " *ngFor="let x of movieList">
-                            <div class="card">
-
-                                <app-rating [movieDetail]="x"></app-rating>
-                            </div>
+                    <div class="row gy-4" id="main-row">
+                        <div class="col-6 col-md-3 col-lg-2 " *ngFor="let x of movieList">
+                            <app-rating [movieDetail]="x"></app-rating>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
-</div>
+</body>

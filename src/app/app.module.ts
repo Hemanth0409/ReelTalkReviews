@@ -21,6 +21,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {DatePipe, JsonPipe} from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { RatingModule } from 'primeng/rating';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +40,7 @@ import { CelebritiesComponent } from './celebrities/celebrities.component';
 import { PostMemberComponent } from './post-member/post-member.component';
 import { RatingComponent } from './movielist/rating/rating.component';
 import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
+import { UploadImgComponent } from './upload-img/upload-img.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { ViewMovieComponent } from './movielist/view-movie/view-movie.component'
     PostMemberComponent,
     RatingComponent,
     ViewMovieComponent,
+    UploadImgComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import { ViewMovieComponent } from './movielist/view-movie/view-movie.component'
     MatDatepickerModule,
     MatNativeDateModule,
     JsonPipe,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RatingModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

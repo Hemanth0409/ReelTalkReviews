@@ -11,5 +11,8 @@ export const environment = {
   getFilmIndustryMembers: 'https://localhost:7205/api/FilmIndustryMembers/GetFilmIndustryMembers',
   postFilmIndustryMembers: 'https://localhost:7205/api/FilmIndustryMembers/PostFilmIndustryMember',
   postMovieRating: 'https://localhost:7205/api/MovieRatings/PostMovieRating',
-  baseUrl: 'https://localhost:7205'
+  baseUrl: 'https://localhost:7205',
+  movieDetailId: 'https://localhost:7205/api/MovieDetails/GetMovieDetail',
+  getCertification: 'https://localhost:7205/api/MovieDetails/GetMovieDetailCertification',
+  getcertificationId: 'https://localhost:7205/api/MovieDetails/GetMovieDetailFilm/'
 }

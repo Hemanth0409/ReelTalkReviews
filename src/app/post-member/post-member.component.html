@@ -79,6 +79,8 @@
                         </section>
                     </div>
                 </div>
+               <app-upload-img (onUploadFinished)="uploadFinished($event)"></app-upload-img>
+
                 <div class="col pb-5  mt-5">
                     <button mat-raised-button color="primary" type="submit" class="example-full-width">
                         Register

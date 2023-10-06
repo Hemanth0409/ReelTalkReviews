@@ -108,8 +108,9 @@ export class LoginComponent implements OnInit {
             this.userDetail.setFullName(tokenPayload.unique_name);
             this.userDetail.setRole(tokenPayload.role);
             this.userDetail.setUserId(tokenPayload.sub);
+            this.auth.broadcastSubject(true);
             console.log(tokenPayload.sub);
-            this.router.navigate(['home']);
+            this.router.navigate(['movie']);
           },
           error: (err) => { 
             console.log(err)

@@ -1,116 +1,226 @@
-/* .card {
-    position: relative;
-    width: 80%;
-    height: auto;
-    padding-bottom: 80%;
-    overflow: hidden;
-    perspective: 1000px;
-    background-color: #C9D6DF;
-    color: black;
-    margin: 0 auto;
-} */
+    /* star */
 
+    /* * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-/* 
-.flipper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-} */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #333;
+    }
 
+    .rating {
+        position: relative;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 4px;
+        padding: 30px 40px;
+        border: 3px solid #111;
+        border-radius: 30px;
+        background-color: #353535;
+        box-shadow: 30px 30px 30px -10px rgba(0, 0, 0, 0.5), inset 15px 15px 3px rgba(255, 255, 255, 0.1), -4px -4px 15px rgba(255, 255, 255, 0.1), inset -2px -2px 12px rgba(0, 0, 0, 0.75);
+    }
 
-/* .front,
-.back {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-} */
+    .rating input {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+    }
 
-.front {
-    z-index: 2;
-}
+    .rating input::before {
+        content: '\f005';
+        position: absolute;
+        font-family: fontAwesome;
+        font-size: 34px;
+        color: #111;
+        transition: 0.5s;
+    }
 
-
-/* .back {
-    transform: rotateY(180deg);
-    padding: 1em 1em;
-} */
-
-
-/* .card:hover .flipper {
-    transform: rotateY(180deg);
-} */
-
-#nav-home-tab,
-#nav-profile-tab {
-    background-color: #C9D6DF;
-}
-
-#nav-home-tab:focus,
-#nav-profile-tab:focus {
-    color: red !important;
-}
-
-
-/* star */
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #333;
-}
-
-.rating {
-    position: relative;
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 4px;
-    padding: 30px 40px;
-    border: 3px solid #111;
-    border-radius: 30px;
-    background-color: #353535;
-    box-shadow: 30px 30px 30px -10px rgba(0, 0, 0, 0.5), inset 15px 15px 3px rgba(255, 255, 255, 0.1), -4px -4px 15px rgba(255, 255, 255, 0.1), inset -2px -2px 12px rgba(0, 0, 0, 0.75);
-}
-
-.rating input {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-.rating input::before {
-    content: '\f005';
-    position: absolute;
-    font-family: fontAwesome;
-    font-size: 34px;
-    color: #111;
-    transition: 0.5s;
-}
-
-.rating input:hover~input::before,
-.rating input:hover::before,
-.rating input:checked~input::before,
-.rating input:checked::before {
-    color: var(--c);
-}
+    .rating input:hover~input::before,
+    .rating input:hover::before,
+    .rating input:checked~input::before,
+    .rating input:checked::before {
+        color: var(--c);
+    } */
+    
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0%;
+        padding: 0%;
+    }
+    
+    p {
+        margin: 0%;
+    }
+    
+    #sm-poster {
+        width: 100%;
+        height: 70%;
+    
+    }
+    
+    #bg-poster {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #big-poster {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #main-row {
+        margin-top: 3em;
+    }
+    
+    
+    
+    #gold-star {
+        color: #f5c518;
+    
+    }
+    
+    #rate-btn {
+        background-color: #f5c518;
+    }
+    
+    #movie-name {
+        font-weight: 600;
+        font-size: large;
+    }
+    
+    #rate-star {
+        color: rgb(24, 103, 221);
+    }
+    
+    .certification,
+    .r-date {
+        font-size: small;
+    }
+    
+    #f-col-poster,
+    #s-col-poster,
+    #t-col-poster {
+        padding: .12em;
+        height: 400px;
+    }
+    
+    #fr-col-rating,
+    #fv-col-rating {
+        padding: 0 .4em !important;
+    }
+    
+    #t-col-poster .card {
+        background-color: rgb(53, 53, 53);
+    }
+    
+    #t-col-poster .card:hover {
+        background-color: rgb(32, 32, 32) !important;
+        cursor: pointer;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /* rating styles for modal */
+    .rating {
+        position: relative;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 4px;
+        padding: 0px 40px;
+        /* border: 3px solid #111;
+        border-radius: 30px; */
+        background-color: #353535;
+        /* box-shadow: 30px 30px 30px -10px rgba(0, 0, 0, 0.5),
+            inset 15px 15px 3px rgba(255, 255, 255, 0.1),
+            -4px -4px 15px rgba(255, 255, 255, 0.1),
+            inset -2px -2px 12px rgba(0, 0, 0, 0.75); */
+    }
+    
+    .your-rate {
+        background-color: #353535;
+    }
+    
+    .your-rate h4 {
+        margin-left: 1.7em;
+    }
+    
+    
+    
+    .rating input {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+    
+    .rating input::before {
+        content: '\f005';
+        position: absolute;
+        font-family: fontAwesome;
+        font-size: 20px;
+        color: #111;
+        transition: 0.5s;
+    }
+    
+    .rating input:hover~input::before,
+    .rating input:hover::before,
+    .rating input:checked~input::before,
+    .rating input:checked::before {
+        color: var(--c);
+    }
+    
+    /* Review Box */
+    .tag {
+        border: 1px solid #ff5a49;
+        border-radius: 5px;
+        color: #ff5a49;
+        cursor: pointer;
+        /* margin-bottom: 10px;
+        margin-left: 2.6em; */
+        padding: 10px;
+        width: 75%;
+    }
+    
+    @media (max-width:991px) {
+        .your-rate h4 {
+            margin-left: 0em;
+        }
+    }
+    
+    @media (max-width:767px) {
+        #rating-card {
+            height: 20% !important;
+        }
+    
+        #t-col-poster {
+            height: 120px;
+            padding: 0% !important;
+        }
+    
+        .your-rate h4 {
+            margin-left: 0em; 
+        }
+    }   

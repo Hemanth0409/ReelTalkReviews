@@ -37,10 +37,11 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit(): void {
     const token = this.auth.getToken();
-    
-    this.auth.currentStatus.subscribe((res)=>{
+    this.auth.authSubject.subscribe((res)=>{
       this.display=res;
-    });
+    })
+    
+    
     const refreshToken = this.auth.getRefreshToken();
     if (token || refreshToken) {
       this.hide = false;

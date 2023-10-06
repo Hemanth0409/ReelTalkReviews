@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Subject } from 'rxjs/internal/Subject';
 import { environment } from 'src/environment/environment';
 import { TokenApiModel } from 'src/models/tokenApi.model';
 
@@ -12,13 +13,16 @@ export class AuthService {
   private userPayload: any;
   public authStatus=new BehaviorSubject<boolean>(true);
   public currentStatus = this.authStatus.asObservable();
-
+authSubject=new Subject<boolean>;
   refreshURL=environment.userTokenRefresh
   constructor(private http:HttpClient) {
     this.userPayload = this.decodeToken();
   }
 
   // userRole:Subject<s>
+broadcastSubject(item:boolean){
+this.authSubject.next(item);
+}
 
   storeToken(tokenValue: string) {
     localStorage.setItem('token', tokenValue);

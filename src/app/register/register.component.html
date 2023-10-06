@@ -55,18 +55,8 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="row d-flex ">
-                    <div class="col">
-                        <mat-form-field>
-                            <mat-label>Avatar</mat-label>
-                            <mat-select formControlName="avatar" [errorStateMatcher]="matcher">
-                                <mat-option *ngFor="let img of avatarList" id="avatar" value={{img}} (click)="avatar_click(img)"><img id="displayPic" src={{img}} class="ms-5 rounded" alt="" height="50px" width="50px"></mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="displayPic.hasError('required')">Avatar is Required</mat-error>
-                        </mat-form-field>
-                        <img *ngIf="selected_Avatar" [src]="selected_Avatar" class="ms-5 mb-3 rounded" height="40px" width="40px" alt="">
-                    </div>
-                </div>
+                <app-upload-img (onUploadFinished)="uploadFinished($event)"></app-upload-img>
+
                 <br>
                 <div class="col pb-5">
                     <p class=" pt-3 text-secondary d-flex justify-content-center"><a routerLink="/login" class="text-decoration-none">Already have

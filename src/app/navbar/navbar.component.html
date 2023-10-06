@@ -1,40 +1,37 @@
-<!-- Navbar -->
+<!-- navbar.component.html -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!-- Container wrapper -->
     <div class="container">
-        <!-- Navbar brand -->
-        <a class="navbar-brand" href="#"><img id="MDB-logo" src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.png" alt="MDB Logo" draggable="false" height="30" /></a>
+        <a class="navbar-brand" href="#"><img id="MDB-logo"
+                src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.png" alt="MDB Logo"
+                draggable="false" height="30" /></a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
 
-        <!-- Toggle button -->
-
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">  
             <ul class="navbar-nav me-3">
                 <li class="nav-item">
                     <a class="nav-link active d-flex align-items-center" aria-current="page" routerLink="movie"><i
-                class="fas fa-bars pe-2" ></i>MovieList</a>
+                            class="fas fa-bars pe-2"></i>MovieList</a>
                 </li>
             </ul>
-            <!-- Left links -->
 
             <form class="d-flex align-items-center w-100 form-search">
                 <div class="input-group">
-
-
                     <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
                 </div>
                 <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
             </form>
+
             <ul class="navbar-nav ms-3">
                 <li class="nav-item me-3">
-                    <a class="nav-link d-flex align-items-center" routerLink="celebrities"><i class="fa-solid fa-users"></i>Celebrities</a>
+                    <a class="nav-link d-flex align-items-center" routerLink="celebrities"><i
+                            class="fa-solid fa-users"></i>Celebrities</a>
                 </li>
-                <ng-container *ngIf=" role=='User'">
+                <ng-container *ngIf="role=='User'">
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center me-3" href="#!">
                             <i class="fas fa-bookmark pe-2"></i> Watchlist
@@ -43,7 +40,8 @@
                 </ng-container>
                 <ng-container *ngIf="role=='Admin'">
                     <li class="nav-item" style="width: 90px;">
-                        <a class="nav-link d-flex align-items-center" routerLink="users"> <i class="fa-solid fa-user me-1 mb-1"></i>User List</a>
+                        <a class="nav-link d-flex align-items-center" routerLink="users"><i
+                                class="fa-solid fa-user me-1 mb-1"></i>User List</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="hide">
@@ -51,9 +49,10 @@
                         <a class="nav-link d-flex align-items-center" routerLink="login">Sign In</a>
                     </li>
                 </ng-container>
-                <ng-container *ngIf="role=='Admin'|| role=='User'">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center"><i class="fa-solid fa-user me-1 mb-1"></i>{{name}}</a>
+                <ng-container *ngIf="role=='Admin' || role=='User'">
+                    <li *ngIf="display" class="nav-item">
+                        <a class="nav-link d-flex align-items-center"><i class="fa-solid fa-user me-1 mb-1"></i>{{ name
+                            }}</a>
                     </li>
                     <li class="nav-item" style="width: 65px;">
                         <a class="nav-link d-flex align-items-center" (click)="logout()">Logout</a>
