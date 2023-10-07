@@ -11,8 +11,8 @@ import { MovieDetailsService } from 'src/services/movie-details.service';
   styleUrls: ['./movielist.component.css']
 })
 export class MovielistComponent implements OnInit {
-starRating!:number;
-  constructor(private movieService: MovieDetailsService, private auth: AuthService,private datePipe:DatePipe) { }
+  starRating!: number;
+  constructor(private movieService: MovieDetailsService, private auth: AuthService, private datePipe: DatePipe) { }
   movieList: MovieList[] = [];
   userRole!: string;
   colDefs: ColDef[] = [
@@ -20,9 +20,11 @@ starRating!:number;
     { field: 'movieType' },
     { field: 'movieRatingOverall' },
     { field: 'filmCertificationId' },
-    { field: 'releaseDate',cellRenderer: (params: ICellRendererParams) => {
-      return `<p>${this.datePipe.transform(params.value)}</p>`;
-    } }
+    {
+      field: 'releaseDate', cellRenderer: (params: ICellRendererParams) => {
+        return `<p>${this.datePipe.transform(params.value)}</p>`;
+      }
+    }
   ]
   defaultColDef: ColDef = {
     sortable: true, filter: true
@@ -30,7 +32,7 @@ starRating!:number;
 
   // Add a property to store star ratings for each movie
   movieRatings: { [movieId: number]: number } = {};
-
+  searchText: any;
   ngOnInit(): void {
     this.userRole = this.auth.getRole();
     this.movieService.getMovieDetails().subscribe({
@@ -41,6 +43,9 @@ starRating!:number;
         console.log(err);
       },
     });
+    this.auth.searchTerm.subscribe((res) => {
+      this.searchText = res;
+    })
   }
 
   onGridReady(params: GridReadyEvent) {
@@ -53,5 +58,5 @@ starRating!:number;
     params.api.sizeColumnsToFit();
   }
 
-  
+
 }

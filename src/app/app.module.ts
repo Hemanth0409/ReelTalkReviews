@@ -14,13 +14,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { AgGridModule } from 'ag-grid-angular';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
-import {DatePipe, JsonPipe} from '@angular/common';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { DatePipe, JsonPipe } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RatingModule } from 'primeng/rating';
 
 
@@ -41,7 +41,7 @@ import { RatingComponent } from './movielist/rating/rating.component';
 import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
 import { UploadImgComponent } from './upload-img/upload-img.component';
 import { CelebritiesComponent } from './celebrities/celebrities.component';
-
+import { SortmoviePipe } from 'src/shared/sortmovie.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +59,8 @@ import { CelebritiesComponent } from './celebrities/celebrities.component';
     RatingComponent,
     ViewMovieComponent,
     UploadImgComponent,
+    SortmoviePipe
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ import { CelebritiesComponent } from './celebrities/celebrities.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RecaptchaModule,
-    RecaptchaFormsModule ,
+    RecaptchaFormsModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -86,10 +88,11 @@ import { CelebritiesComponent } from './celebrities/celebrities.component';
     RatingModule
   ],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptor,
-    multi:true
-  },MessageService ,DatePipe
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }, MessageService, DatePipe,
+
   ],
   bootstrap: [AppComponent]
 })

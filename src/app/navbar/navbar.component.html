@@ -20,7 +20,7 @@
 
             <form class="d-flex align-items-center w-100 form-search">
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+                    <input type="search" class="form-control"  (keyup)="searchTermEmit($event)" placeholder="Search" aria-label="Search" />
                 </div>
                 <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
             </form>

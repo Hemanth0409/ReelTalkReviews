@@ -66,4 +66,8 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  searchTermEmit(event: any) {
+    console.log(event.target.value);
+    this.auth.changeSearchTerm(event.target.value);
+  }
 }

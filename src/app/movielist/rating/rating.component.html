@@ -16,8 +16,10 @@
         <p id="movie-name">{{movieDetail.movieTitle}}</p>
     </a>
     <div class="d-flex align-items-center flex-row">
-        <p class="certification me-1" *ngIf="movieDetail.movieId==filmCertification.movieId">
-            {{filmCertification.filmCertificationType}}</p>
+        <p class=" text-white" *ngIf="movieDetail.filmCertificationId==1">(U)</p>
+        <p class=" text-white" *ngIf="movieDetail.filmCertificationId==2">(U/A)</p>
+        <p class=" text-white" *ngIf="movieDetail.filmCertificationId==3">(A)</p>
+
         <p>&nbsp;&#x2022;</p>
         <p class="r-date ms-2">{{movieDetail.releaseDate|date}}</p>
     </div>

@@ -18,7 +18,11 @@ authSubject=new Subject<boolean>;
   constructor(private http:HttpClient) {
     this.userPayload = this.decodeToken();
   }
+  public searchTerm = new Subject<string>;
 
+  changeSearchTerm(value: string) {
+    this.searchTerm.next(value);
+  }
   // userRole:Subject<s>
 broadcastSubject(item:boolean){
 this.authSubject.next(item);

@@ -111,7 +111,6 @@ export class LoginComponent implements OnInit {
             this.auth.broadcastSubject(true);
             console.log(tokenPayload.sub);
             this.router.navigate(['']);
-            window.location.reload()
 
           },
           error: (err) => {

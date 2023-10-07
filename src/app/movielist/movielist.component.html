@@ -16,7 +16,7 @@
             <div class="tab-pane fade active show pb-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="container">
                     <div class="row gy-4" id="main-row">
-                        <div class="col-6 col-md-3 col-lg-2 " *ngFor="let x of movieList">
+                        <div class="col-6 col-md-3 col-lg-2 " *ngFor="let x of movieList|filter:searchText">
                             <app-rating [movieDetail]="x"></app-rating>
                         </div>
                     </div>
