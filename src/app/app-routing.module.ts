@@ -7,9 +7,9 @@ import { authGuard } from 'src/gaurd/auth.guard';
 import { MovielistComponent } from './movielist/movielist.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { PostMovieComponent } from './post-movie/post-movie.component';
-import { CelebritiesComponent } from './celebrities/celebrities.component';
 import { PostMemberComponent } from './post-member/post-member.component';
 import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
+import { CelebritiesComponent } from './celebrities/celebrities.component';
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
     component: HomeComponent, canActivate: [authGuard]
   },
   {
-    path: 'movie',
+    path: '',
     component: MovielistComponent,
   }
   ,
@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'celebrities',
-    component: CelebritiesComponent, canActivate: [authGuard]
+    component: CelebritiesComponent,
   }, {
     path: 'postmembers',
     component: PostMemberComponent, canActivate: [authGuard]

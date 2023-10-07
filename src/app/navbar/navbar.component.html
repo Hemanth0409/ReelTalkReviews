@@ -1,21 +1,20 @@
 <!-- navbar.component.html -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#"><img id="MDB-logo"
                 src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.png" alt="MDB Logo"
-                draggable="false" height="30" /></a>
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
+                draggable="false" height="30" routerLink="" /></a>
+        
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-3">
                 <li class="nav-item">
-                    <a class="nav-link active d-flex align-items-center" aria-current="page" routerLink="movie"><i
-                            class="fas fa-bars pe-2"></i>MovieList</a>
+                    <a class="nav-link active d-flex align-items-center" aria-current="page" routerLink=""><i
+                            class="fa-solid fa-film pe-2"></i>MovieList</a>
                 </li>
             </ul>
 
@@ -31,13 +30,7 @@
                     <a class="nav-link d-flex align-items-center" routerLink="celebrities"><i
                             class="fa-solid fa-users"></i>Celebrities</a>
                 </li>
-                <ng-container *ngIf="role=='User'">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center me-3" href="#!">
-                            <i class="fas fa-bookmark pe-2"></i> Watchlist
-                        </a>
-                    </li>
-                </ng-container>
+
                 <ng-container *ngIf="role=='Admin'">
                     <li class="nav-item" style="width: 90px;">
                         <a class="nav-link d-flex align-items-center" routerLink="users"><i
@@ -50,9 +43,9 @@
                     </li>
                 </ng-container>
                 <ng-container *ngIf="role=='Admin' || role=='User'">
-                    <li *ngIf="display" class="nav-item">
-                        <a class="nav-link d-flex align-items-center"><i class="fa-solid fa-user me-1 mb-1"></i>{{ name
-                            }}</a>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center"><i
+                                class="fa-solid fa-user me-1 mb-1"></i>{{name}}</a>
                     </li>
                     <li class="nav-item" style="width: 65px;">
                         <a class="nav-link d-flex align-items-center" (click)="logout()">Logout</a>

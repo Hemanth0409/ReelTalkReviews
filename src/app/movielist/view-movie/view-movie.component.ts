@@ -61,8 +61,14 @@ export class ViewMovieComponent implements OnInit {
   ratingCount: number = 0; // Initialize with zero
 
   matcher = new MyErrorStateMatcher();
-
+  hide!: boolean;
   ngOnInit(): void {
+    const getToken = this.auth.getToken();
+    if (getToken) {
+      this.hide = false;
+    }else{
+    this.router.navigate(['login']);
+    }
     this.currentUserId = this.auth.getUserID();
     this.currentMovieId = this.actRoute.snapshot.params['id'];
     this.numUserId = Number(this.currentUserId);
@@ -97,7 +103,7 @@ export class ViewMovieComponent implements OnInit {
       console.log(this.reviewDetail.value)
       this.movieService.postMovieRating(this.reviewDetail.value).subscribe({
         next: () => {
-          this.router.navigate(['/movie']);
+          this.router.navigate(['']);
         },
         error: (error) => {
           console.log(error);

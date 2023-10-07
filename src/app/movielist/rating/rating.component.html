@@ -1,51 +1,24 @@
-<!-- <div class="flipper">
-    <div class="front text-center">
-        <div class="mt-2">
-            <img src="data:image;base64,@Convert.ToBase64String{{x.moviePoster}}" width="90" height="90" class="rounded-pill" />
-        </div>
-        <div class="card-title  p-2 mt-3" (click)="viewMovie(movieDetail.movieId)">
-            <div><b>Movie Title:</b>{{movieDetail.movieTitle}}</div>
-            <div class="card-text">
-                <b>Movie Type:</b> {{movieDetail.movieType}}
-            </div>
-            <div class="card-text"><b>Film Certification:</b> {{movieDetail.filmCertificationId}}
-            </div>
-            <div class="card-text"><b>Overall Rating:</b> {{movieDetail.movieRatingOverall}}<i class="fa-solid fa-star"></i>
-                <button class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-solid fa-star"></i> 
-            </button>
-            </div>
-            <div class="card-text"><b>Release Date:</b> {{movieDetail.releaseDate}}
-            </div>
-            <div>{{starRating}}</div>
-        </div>
+<img src="{{'https://localhost:7205/'+movieDetail.moviePoster}}" class="img-fluid" id="sm-poster" alt="movie poster"
+    (click)="viewMovie(movieDetail.movieId)">
+<div class="card bg-dark rounded-0 text-white p-2" (click)="viewMovie(movieDetail.movieId)">
+    <div class="d-flex align-items-center flex-row">
+        <p class="text-secondary"><i class="fa-solid fa-star" id="gold-star"></i>
+            <b>{{movieDetail.movieRatingOverall}}({{movieDetail.ratingCount}})</b>
+        </p>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark ms-2 shadow-none" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <p><i class="fa-regular fa-star " id="rate-star"></i></p>
+        </button>
     </div>
-
-</div> -->
-
-
-    <!-- SMALL CARD -->
-
-
-    <img src="{{'https://localhost:7205/'+movieDetail.moviePoster}}"
-        class="img-fluid" id="sm-poster" alt="movie poster" (click)="viewMovie(movieDetail.movieId)">
-    <div class="card bg-dark rounded-0 text-white p-2" (click)="viewMovie(movieDetail.movieId)">
-        <div class="d-flex align-items-center flex-row">
-            <p class="text-secondary"><i class="fa-solid fa-star" id="gold-star"></i>
-                <b>{{movieDetail.movieRatingOverall}}({{movieDetail.ratingCount}})</b></p>
-
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-dark ms-2 shadow-none" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
-                <p><i class="fa-regular fa-star " id="rate-star"></i></p>
-            </button>
-        </div>
-        <a href="#" class="link-light text-decoration-none">
-            <p id="movie-name">{{movieDetail.movieTitle}}</p>
-        </a>
-        <div class="d-flex align-items-center flex-row">
-            <p class="certification me-1" *ngIf="movieDetail.movieId==filmCertification.movieId">{{filmCertification.filmCertificationType}}</p>
-            <p>&nbsp;&#x2022;</p>
-            <p class="r-date ms-2">{{movieDetail.releaseDate|date}}</p>
-        </div>
+    <a href="#" class="link-light text-decoration-none">
+        <p id="movie-name">{{movieDetail.movieTitle}}</p>
+    </a>
+    <div class="d-flex align-items-center flex-row">
+        <p class="certification me-1" *ngIf="movieDetail.movieId==filmCertification.movieId">
+            {{filmCertification.filmCertificationType}}</p>
+        <p>&nbsp;&#x2022;</p>
+        <p class="r-date ms-2">{{movieDetail.releaseDate|date}}</p>
     </div>
+</div>

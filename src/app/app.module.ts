@@ -36,11 +36,11 @@ import { MovielistComponent } from './movielist/movielist.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ActionLinkComponent } from './action-link/action-link.component';
 import { PostMovieComponent } from './post-movie/post-movie.component';
-import { CelebritiesComponent } from './celebrities/celebrities.component';
 import { PostMemberComponent } from './post-member/post-member.component';
 import { RatingComponent } from './movielist/rating/rating.component';
 import { ViewMovieComponent } from './movielist/view-movie/view-movie.component';
 import { UploadImgComponent } from './upload-img/upload-img.component';
+import { CelebritiesComponent } from './celebrities/celebrities.component';
 
 @NgModule({
   declarations: [

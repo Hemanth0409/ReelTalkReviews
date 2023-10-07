@@ -11,15 +11,15 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
   public name!: string;
-  public id!:string;
+  public id!: string;
   public role!: string;
   hide!: boolean;
-  display!:boolean;
+  display!: boolean;
   constructor(private login: RegisterationService, private auth: AuthService, private userDetail: UserDetailService, private router: Router) {
   }
   logout() {
     this.login.signOut();
-    this.hide=true;
+    this.hide = true;
     const Toast = Swal.mixin({
       toast: true,
       position: 'top',
@@ -31,17 +31,19 @@ export class NavbarComponent implements OnInit {
       icon: 'success',
       title: 'Logged successfully'
     }).then(() => {
+      window.location.reload();
+
       this.router.navigate(['login']);
     })
 
   }
   ngOnInit(): void {
     const token = this.auth.getToken();
-    this.auth.authSubject.subscribe((res)=>{
-      this.display=res;
+    this.auth.authSubject.subscribe((res) => {
+      this.display = res;
     })
-    
-    
+
+
     const refreshToken = this.auth.getRefreshToken();
     if (token || refreshToken) {
       this.hide = false;

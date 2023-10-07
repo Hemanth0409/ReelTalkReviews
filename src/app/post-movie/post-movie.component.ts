@@ -102,7 +102,7 @@ export class PostMovieComponent implements OnInit {
       this.movieDetail.postMovieDetail(this.movieDetails.value).subscribe(
         {
           next: () => {
-            this.router.navigate(['/movie']);
+            this.router.navigate(['']);
           },
           error: (error) => {
             console.log(error)

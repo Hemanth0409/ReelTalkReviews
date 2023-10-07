@@ -110,9 +110,11 @@ export class LoginComponent implements OnInit {
             this.userDetail.setUserId(tokenPayload.sub);
             this.auth.broadcastSubject(true);
             console.log(tokenPayload.sub);
-            this.router.navigate(['movie']);
+            this.router.navigate(['']);
+            window.location.reload()
+
           },
-          error: (err) => { 
+          error: (err) => {
             console.log(err)
             const Toast = Swal.mixin({
               toast: true,
