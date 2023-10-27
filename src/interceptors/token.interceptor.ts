@@ -11,11 +11,12 @@ import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { TokenApiModel } from 'src/models/tokenApi.model';
+import { RegisterationService } from 'src/services/registration.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private login: RegisterationService,) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const myToken = this.auth.getToken();
@@ -63,7 +64,7 @@ export class TokenInterceptor implements HttpInterceptor {
             title: 'Login First',
             text: 'Please login to Explore'
           }),
-            this.router.navigate(['login']);
+          this.login.signOut();
         })
       })
     );
